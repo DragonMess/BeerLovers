@@ -1,0 +1,23 @@
+id,trade_name,brewer_id,logo,coordinates_x,coordinates_Y
+1,Brasserie Fantome,1,,45.646694,-73.519728
+2,BelleBiere,2,,45.607382,-73.540568
+3,Copper Eagle Brewing,3,,45.447936,-73.847966
+4,Dragonmead Microbrewery,4,,45.48171,-73.858688
+5,Egan Brewing,5,,45.523072,-73.574199
+6,F.X. Matt Brewing,6,,45.520494,-73.57232
+7,Freeminer Brewery,7,,45.522941,-73.563257
+8,Glacial Lakes Brewing,8,,45.508984,-73.577484
+9,Gray Brewing,9,,45.493557,-73.561313
+10,Half Moon Bay Brewing,10,,45.491229,-73.56967
+11,Jacob Leinenkugel Brewin,11,,45.463383,-73.54853
+12,Lancaster Brewing Co.,12,,45.49787,-73.475024
+13,Mad River Brewing,13,,45.535107,-73.456905
+14,Mikkeller,14,,45.548844,-73.576442
+15,Odell Brewing,15,,45.55147,-73.573856
+16,RCH Brewery,16,,45.523248,-73.57253
+17,River West Brewing,17,,45.520371,-73.578039
+18,Saint Louis Brewery,18,,45.521263,-73.584422
+19,MaBiere,19,,45.521225,-73.59015
+20,Spanish Peaks Brewing,20,,45.5515,-73.611291
+21,The Alchemist,21,,45.553378,-73.610617
+22,CervezaPorfavor,22,,45.524431,-73.65006
