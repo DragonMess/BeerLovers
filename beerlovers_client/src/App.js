@@ -4,16 +4,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import NavigationBotton from "./components/NavigationBotton";
-import Home from "./components/Home";
-import MapProducts from "./components/MapProducts";
-import Login from "./components/Login";
-import Products from "./components/Products";
-import Register from "./components/Register";
+import Home from "./Home";
+import MapProducts from "./MapProducts";
+import Login from "./Login";
+import Products from "./Products";
+import Register from "./Register";
+import NoMatch from "./NoMatch";
 import Layout from "./components/Layout";
 
 function App() {
   return (
-    // <div className="App">
     <>
       <Layout>
         <Navigation />
@@ -24,6 +24,7 @@ function App() {
             <Route path="/Register" component={Register} />
             <Route path="/MapProducts" component={MapProducts} />
             <Route path="/Products" component={Products} />
+            <Route path="/NoMatch" component={NoMatch} />
             {/* <Route path="/Breweries" component={Breweries} /> */}
 
             {/* <Route
@@ -35,7 +36,6 @@ function App() {
         <NavigationBotton fixed="bottom" />
       </Layout>
     </>
-    // </div>
 
     //
     //   <header className="App-header">
