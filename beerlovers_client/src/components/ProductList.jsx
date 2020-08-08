@@ -6,7 +6,7 @@ import { filterBeer } from "../helpers/selectors";
 const { Styles } = styleComponents();
 
 const ProductList = (props) => {
-  const { products, beerType } = props;
+  const { products, beerType, findIdBeer } = props;
 
   const productByType = filterBeer(products, beerType);
 
@@ -18,7 +18,9 @@ const ProductList = (props) => {
               name={dataProduct.product_name}
               price={dataProduct.unit_price}
               rate={dataProduct.rate}
+              id={dataProduct.id}
               dataProduct={dataProduct}
+              findIdBeer={findIdBeer}
             />
           </li>
         );

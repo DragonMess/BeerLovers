@@ -12,6 +12,7 @@ import {
   faEdit,
   faTrashAlt,
   faPlusSquare,
+  faMinusSquare,
   faExclamationTriangle,
   faWineBottle,
   faHeart,
@@ -30,6 +31,7 @@ library.add(
   faEdit,
   faTrashAlt,
   faPlusSquare,
+  faMinusSquare,
   faExclamationTriangle,
   faWineBottle,
   faHearts

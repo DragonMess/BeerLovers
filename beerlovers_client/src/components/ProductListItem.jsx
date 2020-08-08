@@ -4,10 +4,10 @@ import styleComponents from "../styledComponents/styleComponent";
 const { Styles } = styleComponents();
 
 const ProductListItem = (props) => {
-  const { name, price, rate } = props;
+  const { id, name, price, rate, findIdBeer, dataProduct } = props;
   return (
     <Styles>
-      <section className="beerSection">
+      <section className="beerSection" onClick={(e) => findIdBeer(dataProduct)}>
         <div className="nameProduct">
           <h3>{name}</h3>
           <FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />
