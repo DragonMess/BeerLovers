@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import ProductListItem from "./ProductListItem";
 import styleComponents from "../styledComponents/styleComponent";
 import { filterBeer } from "../helpers/selectors";

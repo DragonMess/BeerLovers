@@ -5,6 +5,7 @@ import styled from "styled-components";
 const Styles = styled.div`
   .mainContainer {
     padding: 0;
+    margin: 0;
     background-color: #303841;
     min-height: 100vh;
     font-family: "Montserrat", sans-serif;
