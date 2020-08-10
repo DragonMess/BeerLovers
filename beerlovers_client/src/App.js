@@ -10,6 +10,8 @@ import Login from "./Login";
 import Products from "./Products";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
+import Cart from "./Cart";
+
 import Layout from "./components/Layout";
 
 function App() {
@@ -24,7 +26,9 @@ function App() {
             <Route path="/Register" component={Register} />
             <Route path="/MapProducts" component={MapProducts} />
             <Route path="/Products" component={Products} />
+            <Route path="/Cart" component={Cart} />
             <Route path="/NoMatch" component={NoMatch} />
+
             {/* <Route path="/Breweries" component={Breweries} /> */}
 
             {/* <Route

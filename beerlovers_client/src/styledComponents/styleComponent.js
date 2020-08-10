@@ -167,7 +167,7 @@ export default function StyleComponenet() {
       margin-left: auto;
       margin-right: auto;
       width: 90%;
-      height: 530px;
+      height: 65vh;
       background: #38444d;
       box-shadow: 0px 2px 2px rgba(202, 199, 199, 0.25);
       border-radius: 8px;
@@ -223,6 +223,7 @@ export default function StyleComponenet() {
     }
 
     .submitContainer {
+      height: 15vh;
       padding: 6px;
       width: 90%;
       margin-top: 15px;
@@ -258,7 +259,9 @@ export default function StyleComponenet() {
       text-align: center;
       color: white;
     }
-
+    .btnsQty {
+      margin-left: 5px;
+    }
     .rate-btn {
       width: 130px;
       height: 30px;

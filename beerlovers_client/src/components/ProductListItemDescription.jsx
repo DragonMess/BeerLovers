@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Row, Col, FormControl } from "react-bootstrap";
 import styleComponents from "../styledComponents/styleComponent";
 const { Styles } = styleComponents();
 
 const ProductListItemDescription = (props) => {
-  console.log(props.children[1]);
-  // const { props.children[1] } = props;
+  const stock = props.children[1].stock_quantity;
+
+  const [beerQty, setBeerQty] = useState(1);
+  const handleIncreaseQty = (e) => {
+    if (beerQty < stock) {
+      setBeerQty(beerQty + 1);
+    }
+  };
+  const handleDecreasetQty = (e) => {
+    if (beerQty > 0) {
+      setBeerQty(beerQty - 1);
+    }
+  };
+  // console.log(props.children[1]);
   return (
     <Styles>
       <section className="beerDescriptionSection">
@@ -69,7 +81,10 @@ const ProductListItemDescription = (props) => {
               <b>Price</b>
             </div>
             <div className="compositionValue">
-              ${props.children[1].unit_price}
+              $
+              {(Math.round(props.children[1].unit_price * 100) / 100).toFixed(
+                2
+              )}
             </div>
           </div>
           <hr className="line" />
@@ -79,22 +94,26 @@ const ProductListItemDescription = (props) => {
         <div>Quantity</div>
         <Row>
           <Col xs={4}>
-            <FormControl
+            <input
+              type="text"
               className="input-qty"
               placeholder="Enter Qty"
               aria-label="Qty"
               aria-describedby="basic-addon1"
-            ></FormControl>
+              value={beerQty}
+            ></input>
           </Col>
           <Col xs={2}>
             <Row>
               <FontAwesomeIcon
+                className="btnsQty"
+                onClick={handleIncreaseQty}
                 className="plusIcon"
                 icon={["fas", "plus-square"]}
               />
-            </Row>
-            <Row>
               <FontAwesomeIcon
+                className="btnsQty"
+                onClick={handleDecreasetQty}
                 className="minusIcon"
                 icon={["fas", "minus-square"]}
               />
@@ -111,12 +130,13 @@ const ProductListItemDescription = (props) => {
           </Col>
 
           <Col xs={2}>
-            <FormControl
+            <input
+              type="text"
               className="input-rate"
               placeholder="Rate"
               aria-label="Qty"
               aria-describedby="basic-addon1"
-            ></FormControl>
+            ></input>
           </Col>
           <Col xs={2}>
             <Row>

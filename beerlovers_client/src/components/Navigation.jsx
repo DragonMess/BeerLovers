@@ -52,6 +52,7 @@ const Navigation = () => {
             <Nav.Link href="/Products">Beers</Nav.Link>
             <Nav.Link href="/Breweries">Breweries</Nav.Link>
             <Nav.Link href="/Favourites">Favourites</Nav.Link>
+            <Nav.Link href="/Cart">Cart</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link href="/Login">Login</Nav.Link>
