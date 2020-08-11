@@ -1,19 +1,16 @@
 const express = require("express");
-
-// product_id, user_id;
 const router = express.Router();
 const db = require("../db/db");
 const {
-  getProduct,
-  postProduct,
-  deleteProduct,
-  editProduct,
-} = require("../dbHelpers/dbHelpersProducts");
+  getUser,
+  postUser,
+  deleteUser,
+  editUser,
+} = require("../dbHelpers/dbHelpersUsers");
 
 module.exports = (db) => {
-  /* GET all products */
   router.get("/", (req, res) => {
-    getProduct(db)
+    getUser(db)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
@@ -21,9 +18,9 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // get obj with req.body
 
-    const productObj = req.body;
-    postProduct(productObj)
-      // returning the product id to the client
+    const UserObj = req.body;
+    postUser(UserObj)
+      // returning the User id to the client
       .then((resDB) => {
         res.json(resDB.id);
         // console.log(resDB);
@@ -32,19 +29,20 @@ module.exports = (db) => {
   });
 
   router.delete("/:id", (req, res) => {
-    // get productid from params
+    // get Userid from params
     const idObj = Number(req.params.id);
-    deleteProduct(idObj)
+    deleteUser(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
 
   router.put("/:id", (req, res) => {
-    const productObj = req.body;
-    // console.log(productOb);
-    editProduct(productObj)
+    const UserObj = req.body;
+    // console.log(UserOb);
+    editUser(UserObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
+
   return router;
 };

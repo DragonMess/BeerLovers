@@ -1,0 +1,37 @@
+const db = require("../db/db");
+// product_id, user_id;
+const getFavourites = function (db) {
+  return db
+    .query(`SELECT * FROM Favourites`)
+    .then((res) => res.rows)
+    .catch((err) => console.log(err));
+};
+
+const postFavourites = (userObj) => {
+  //   // Asign array of values to use in queryString
+  const userValues = [userObj.product_id, userObj.user_id];
+
+  let queryString = `INSERT INTO favourites (product_id, user_id) 
+      VALUES ($1,$2) RETURNING *;`;
+
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
+};
+const deleteFavourites = (idObj) => {
+  let userValues = [idObj];
+
+  let queryString = `DELETE FROM favourites
+      WHERE id = $1 RETURNING *;`;
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
+};
+const editFavourites = (userObj) => {
+  const userValues = [userObj.product_id, userObj.user_id];
+  let queryString = `UPDATE favourites SET product_id = $2, user_id = $3 WHERE id = $1 RETURNING *;`;
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
+};
+
+module.exports = {
+  getFavourites,
+  postFavourites,
+  deleteFavourites,
+  editFavourites,
+};
