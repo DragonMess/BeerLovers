@@ -36,9 +36,13 @@ app.get("/", (req, res) => {
 const productRoutes = require("../backend/src/routes/products");
 const userRoutes = require("../backend/src/routes/users");
 const favouritesRoutes = require("../backend/src/routes/favourites");
+const breweriesRoutes = require("../backend/src/routes/breweries");
+
 app.use("/products", productRoutes(db));
 app.use("/users", userRoutes(db));
 app.use("/favourites", favouritesRoutes(db));
+app.use("/breweries", breweriesRoutes(db));
+
 // app.get("/", function (req, res) {
 //   res.send("Hello World");
 // });
