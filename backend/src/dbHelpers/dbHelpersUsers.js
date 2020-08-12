@@ -1,5 +1,15 @@
 const db = require("../db/db");
 
+// users by user_email;
+const getUserByUserEmail = function (UserObj) {
+  let userValues = [UserObj];
+  let queryString = `SELECT * FROM users WHERE email = $1 ;`;
+  return db
+    .query(queryString, userValues)
+    .then((res) => res.rows)
+    .catch((err) => console.log(err));
+};
+
 const getUser = function (db) {
   return db
     .query(`SELECT * FROM Users`)
@@ -9,13 +19,13 @@ const getUser = function (db) {
 
 const postUser = (userObj) => {
   //   // Asign array of values to use in queryString
-  const userValues = [userObj.name, userObj.email, userObj.password];
+  const userValues = [userObj.email, userObj.password];
 
-  let queryString = `INSERT INTO users (name,email,password) 
-      VALUES ($1,$2,$3) RETURNING *;`;
+  let queryString = `SELECT * from users WHERE (email= $1 and password=$2) ;`;
 
-  return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows.length);
 };
+
 const deleteUser = (idObj) => {
   let userValues = [idObj];
 
@@ -35,6 +45,7 @@ const editUser = (userObj) => {
 };
 
 module.exports = {
+  getUserByUserEmail,
   getUser,
   postUser,
   deleteUser,

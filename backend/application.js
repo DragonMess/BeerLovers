@@ -12,8 +12,6 @@ require("dotenv").config();
 const db = require("../backend/src/db/db.js");
 db.connect();
 
-const { token } = require("morgan");
-
 app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
@@ -22,12 +20,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// const orders_details = require("./src/routes/orders_details");
-// const orders = require("./src/routes/orders");
+const { verifyToken } = require("./src/helpers/authorisation");
 
 app.get("/", (req, res) => {
   res.send("GET request to the homepage form the boss Camilo");
 });
+// Routing
 const productRoutes = require("../backend/src/routes/products");
 const userRoutes = require("../backend/src/routes/users");
 const favouritesRoutes = require("../backend/src/routes/favourites");
@@ -35,7 +33,7 @@ const breweriesRoutes = require("../backend/src/routes/breweries");
 const ordersRoutes = require("../backend/src/routes/orders");
 const ordersDetailsRoutes = require("../backend/src/routes/ordersDetails");
 
-app.use("/products", productRoutes(db));
+app.use("/products", verifyToken, productRoutes(db));
 app.use("/users", userRoutes(db));
 app.use("/favourites", favouritesRoutes(db));
 app.use("/breweries", breweriesRoutes(db));
