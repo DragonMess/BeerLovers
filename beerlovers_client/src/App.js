@@ -1,7 +1,12 @@
 import "./App.css";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Navigation from "./components/Navigation";
 import NavigationBotton from "./components/NavigationBotton";
 import Home from "./Home";

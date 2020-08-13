@@ -3,7 +3,13 @@ import { Form, Button } from "react-bootstrap";
 const Register = () => {
   return (
     <div>
+      <h4>Register</h4>
       <Form>
+        <Form.Group>
+          <Form.Label>Name:</Form.Label>
+          <Form.Control type="name" placeholder="Enter name" />
+          <Form.Text className="text-muted"></Form.Text>
+        </Form.Group>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
