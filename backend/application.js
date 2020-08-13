@@ -25,24 +25,29 @@ const { verifyToken } = require("./src/helpers/authorisation");
 app.get("/", (req, res) => {
   res.send("GET request to the homepage form the boss Camilo");
 });
-// Routing
-const productRoutes = require("../backend/src/routes/products");
-const userRoutes = require("../backend/src/routes/users");
-const favouritesRoutes = require("../backend/src/routes/favourites");
-const breweriesRoutes = require("../backend/src/routes/breweries");
-const ordersRoutes = require("../backend/src/routes/orders");
-const ordersDetailsRoutes = require("../backend/src/routes/ordersDetails");
 
-app.use("/products", verifyToken, productRoutes(db));
-app.use("/users", userRoutes(db));
-app.use("/favourites", favouritesRoutes(db));
-app.use("/breweries", breweriesRoutes(db));
-app.use("/orders", ordersRoutes(db));
-app.use("/ordersDetails", ordersDetailsRoutes(db));
-
-// app.get("/", function (req, res) {
+// app.get("/products", function (req, res) {
 //   res.send("Hello World");
 // });
+// Routing
+const publicRoutes = require("./src/routes/publicRoutes/public");
+
+const productRoutes = require("./src/routes/protectedRoutes/products");
+
+const userRoutes = require("./src/routes/protectedRoutes/users");
+const favouritesRoutes = require("./src/routes/protectedRoutes/favourites");
+const breweriesRoutes = require("./src/routes/protectedRoutes/breweries");
+const ordersRoutes = require("./src/routes/protectedRoutes/orders");
+const ordersDetailsRoutes = require("./src/routes/protectedRoutes/ordersDetails");
+
+app.use("/public", publicRoutes(db));
+
+app.use("/products", verifyToken, productRoutes(db));
+app.use("/users", verifyToken, userRoutes(db));
+app.use("/favourites", verifyToken, favouritesRoutes(db));
+app.use("/breweries", verifyToken, breweriesRoutes(db));
+app.use("/orders", verifyToken, ordersRoutes(db));
+app.use("/ordersDetails", verifyToken, ordersDetailsRoutes(db));
 
 app.listen(PORT, () => {
   console.log(`Server listen on port ${PORT} !`);

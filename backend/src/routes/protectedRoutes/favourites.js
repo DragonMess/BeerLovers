@@ -1,19 +1,20 @@
 const express = require("express");
 
-// product_id, user_id;
 const router = express.Router();
-const db = require("../db/db");
+const db = require("../../db/db");
 const {
-  getProduct,
-  postProduct,
-  deleteProduct,
-  editProduct,
-} = require("../dbHelpers/dbHelpersProducts");
+  getFavouritesByUserId,
+  postFavourites,
+  deleteFavourites,
+  editFavourites,
+} = require("../../dbHelpers/dbHelpersFavourites");
 
 module.exports = (db) => {
-  /* GET all products */
-  router.get("/", (req, res) => {
-    getProduct(db)
+  /* GET all Favourites */
+  router.get("/:user_id", (req, res) => {
+    const idObj = Number(req.params.user_id);
+    console.log(idObj);
+    getFavouritesByUserId(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
@@ -21,9 +22,9 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // get obj with req.body
 
-    const productObj = req.body;
-    postProduct(productObj)
-      // returning the product id to the client
+    const favouritesObj = req.body;
+    postFavourites(favouritesObj)
+      // returning the Favourites id to the client
       .then((resDB) => {
         res.json(resDB.id);
         // console.log(resDB);
@@ -32,17 +33,17 @@ module.exports = (db) => {
   });
 
   router.delete("/:id", (req, res) => {
-    // get productid from params
+    // get Favouritesid from params
     const idObj = Number(req.params.id);
-    deleteProduct(idObj)
+    deleteFavourites(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
 
   router.put("/:id", (req, res) => {
-    const productObj = req.body;
-    // console.log(productOb);
-    editProduct(productObj)
+    const favouritesObj = req.body;
+    // console.log(favouritesObj);
+    editFavourites(favouritesObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });

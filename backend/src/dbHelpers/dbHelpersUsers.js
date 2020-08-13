@@ -17,7 +17,16 @@ const getUser = function (db) {
     .catch((err) => console.log(err));
 };
 
-const postUser = (userObj) => {
+const postUserRegister = (userObj) => {
+  //   // Asign array of values to use in queryString
+  const userValues = [userObj.name, userObj.email, userObj.password];
+
+  let queryString = `INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *;`;
+
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
+};
+
+const postUserLogin = (userObj) => {
   //   // Asign array of values to use in queryString
   const userValues = [userObj.email, userObj.password];
 
@@ -47,7 +56,8 @@ const editUser = (userObj) => {
 module.exports = {
   getUserByUserEmail,
   getUser,
-  postUser,
+  postUserLogin,
   deleteUser,
   editUser,
+  postUserRegister,
 };

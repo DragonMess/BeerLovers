@@ -1,9 +1,13 @@
 const db = require("../db/db");
 const getProduct = function (db) {
-  return db
-    .query(`SELECT * FROM products`)
-    .then((res) => res.rows)
-    .catch((err) => console.log(err));
+  return (
+    db
+      .query(`SELECT * FROM products`)
+      // .then((res) => console.log(res))
+
+      .then((res) => res.rows)
+      .catch((err) => console.log(err))
+  );
 };
 
 const postProduct = (productObj) => {

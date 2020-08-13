@@ -1,16 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const db = require("../db/db");
-const verifyToken = require("../helpers/authorisation");
+const db = require("../../db/db");
+
 const {
   getUserByUserEmail,
   getUser,
   postUser,
   deleteUser,
   editUser,
-} = require("../dbHelpers/dbHelpersUsers");
+} = require("../../dbHelpers/dbHelpersUsers");
 
 module.exports = (db) => {
   /* GET by user id Orders */

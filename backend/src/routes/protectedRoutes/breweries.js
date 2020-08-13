@@ -1,20 +1,26 @@
 const express = require("express");
 
 const router = express.Router();
-const db = require("../db/db");
+const db = require("../../db/db");
 const {
-  getFavouritesByUserId,
-  postFavourites,
-  deleteFavourites,
-  editFavourites,
-} = require("../dbHelpers/dbHelpersFavourites");
+  getBreweries,
+  getBreweriesByUserId,
+  postBreweries,
+  deleteBreweries,
+  editBreweries,
+} = require("../../dbHelpers/dbHelpersBreweries");
 
 module.exports = (db) => {
-  /* GET all Favourites */
+  /* GET all Breweries */
+  router.get("/", (req, res) => {
+    getBreweries(db)
+      .then((resDB) => res.json(resDB))
+      .catch((err) => console.log(err));
+  });
+  /* GET by user id Breweries */
   router.get("/:user_id", (req, res) => {
     const idObj = Number(req.params.user_id);
-    console.log(idObj);
-    getFavouritesByUserId(idObj)
+    getBreweriesByUserId(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
@@ -22,9 +28,9 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // get obj with req.body
 
-    const favouritesObj = req.body;
-    postFavourites(favouritesObj)
-      // returning the Favourites id to the client
+    const breweriesObj = req.body;
+    postBreweries(breweriesObj)
+      // returning the breweries id to the client
       .then((resDB) => {
         res.json(resDB.id);
         // console.log(resDB);
@@ -33,17 +39,17 @@ module.exports = (db) => {
   });
 
   router.delete("/:id", (req, res) => {
-    // get Favouritesid from params
+    // get Breweriesid from params
     const idObj = Number(req.params.id);
-    deleteFavourites(idObj)
+    deleteBreweries(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
 
   router.put("/:id", (req, res) => {
-    const favouritesObj = req.body;
-    // console.log(favouritesObj);
-    editFavourites(favouritesObj)
+    const breweriesObj = req.body;
+    // console.log(breweriesObj);
+    editBreweries(breweriesObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });

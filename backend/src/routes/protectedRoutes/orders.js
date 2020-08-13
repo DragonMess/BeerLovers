@@ -1,26 +1,26 @@
 const express = require("express");
 
 const router = express.Router();
-const db = require("../db/db");
+const db = require("../../db/db");
 const {
-  getOrdersDetails,
-  getOrdersDetailsByUserId,
-  postOrdersDetails,
-  deleteOrdersDetails,
-  editOrdersDetails,
-} = require("../dbHelpers/dbHelpersOrdersDetails");
+  getOrders,
+  getOrdersByUserId,
+  postOrders,
+  deleteOrders,
+  editOrders,
+} = require("../../dbHelpers/dbHelpersOrders");
 
 module.exports = (db) => {
-  /* GET all OrdersDetails */
+  /* GET all Orders */
   router.get("/", (req, res) => {
-    getOrdersDetails(db)
+    getOrders(db)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
   /* GET by user id Orders */
   router.get("/:user_id", (req, res) => {
     const idObj = Number(req.params.user_id);
-    getOrdersDetailsByUserId(idObj)
+    getOrdersByUserId(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
@@ -28,9 +28,9 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // get obj with req.body
 
-    const ordersDetailsObj = req.body;
-    postOrdersDetails(ordersDetailsObj)
-      // returning the ordersDetails id to the client
+    const ordersObj = req.body;
+    postOrders(ordersObj)
+      // returning the orders id to the client
       .then((resDB) => {
         res.json(resDB.id);
         // console.log(resDB);
@@ -39,17 +39,17 @@ module.exports = (db) => {
   });
 
   router.delete("/:id", (req, res) => {
-    // get ordersDetailsId from params
+    // get ordersId from params
     const idObj = Number(req.params.id);
-    deleteOrdersDetails(idObj)
+    deleteOrders(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
 
   router.put("/:id", (req, res) => {
-    const ordersDetailsObj = req.body;
-    // console.log(ordersDetailsObj);
-    editOrdersDetails(ordersDetailsObj)
+    const ordersObj = req.body;
+    // console.log(ordersObj);
+    editOrders(ordersObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });

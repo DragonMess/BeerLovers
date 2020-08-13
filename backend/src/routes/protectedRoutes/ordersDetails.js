@@ -1,26 +1,26 @@
 const express = require("express");
 
 const router = express.Router();
-const db = require("../db/db");
+const db = require("../../db/db");
 const {
-  getBreweries,
-  getBreweriesByUserId,
-  postBreweries,
-  deleteBreweries,
-  editBreweries,
-} = require("../dbHelpers/dbHelpersBreweries");
+  getOrdersDetails,
+  getOrdersDetailsByUserId,
+  postOrdersDetails,
+  deleteOrdersDetails,
+  editOrdersDetails,
+} = require("../../dbHelpers/dbHelpersOrdersDetails");
 
 module.exports = (db) => {
-  /* GET all Breweries */
+  /* GET all OrdersDetails */
   router.get("/", (req, res) => {
-    getBreweries(db)
+    getOrdersDetails(db)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
-  /* GET by user id Breweries */
+  /* GET by user id Orders */
   router.get("/:user_id", (req, res) => {
     const idObj = Number(req.params.user_id);
-    getBreweriesByUserId(idObj)
+    getOrdersDetailsByUserId(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
@@ -28,9 +28,9 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     // get obj with req.body
 
-    const breweriesObj = req.body;
-    postBreweries(breweriesObj)
-      // returning the breweries id to the client
+    const ordersDetailsObj = req.body;
+    postOrdersDetails(ordersDetailsObj)
+      // returning the ordersDetails id to the client
       .then((resDB) => {
         res.json(resDB.id);
         // console.log(resDB);
@@ -39,17 +39,17 @@ module.exports = (db) => {
   });
 
   router.delete("/:id", (req, res) => {
-    // get Breweriesid from params
+    // get ordersDetailsId from params
     const idObj = Number(req.params.id);
-    deleteBreweries(idObj)
+    deleteOrdersDetails(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
 
   router.put("/:id", (req, res) => {
-    const breweriesObj = req.body;
-    // console.log(breweriesObj);
-    editBreweries(breweriesObj)
+    const ordersDetailsObj = req.body;
+    // console.log(ordersDetailsObj);
+    editOrdersDetails(ordersDetailsObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
