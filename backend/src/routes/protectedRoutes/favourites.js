@@ -13,7 +13,7 @@ module.exports = (db) => {
   /* GET all Favourites */
   router.get("/:user_id", (req, res) => {
     const idObj = Number(req.params.user_id);
-    console.log(idObj);
+    // console.log("idFav", req.params);
     getFavouritesByUserId(idObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));

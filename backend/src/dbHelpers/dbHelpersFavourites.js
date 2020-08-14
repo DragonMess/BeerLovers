@@ -2,11 +2,16 @@ const db = require("../db/db");
 // product_id, user_id;
 const getFavouritesByUserId = function (idObj) {
   let userValues = [idObj];
+  console.log("idObjFav", userValues);
   let queryString = `SELECT * FROM Favourites WHERE user_id = $1 ;`;
-  return db
-    .query(queryString, userValues)
-    .then((res) => res.rows)
-    .catch((err) => console.log(err));
+  return (
+    db
+      .query(queryString, userValues)
+      // .then((res) => res.rows)
+      .then((res) => console.Log("dbFav", res.rows))
+
+      .catch((err) => console.log(err))
+  );
 };
 
 const postFavourites = (userObj) => {
@@ -26,7 +31,7 @@ const deleteFavourites = (idObj) => {
 };
 const editFavourites = (userObj) => {
   const userValues = [userObj.product_id, userObj.user_id];
-  let queryString = `UPDATE favourites SET product_id = $2, user_id = $3 WHERE id = $1 RETURNING *;`;
+  let queryString = `UPDATE favourites SET product_id = $2, user_id = $2 WHERE id = $1 RETURNING *;`;
   return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
 };
 

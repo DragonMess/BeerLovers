@@ -25,7 +25,7 @@ const postOrdersDetails = (userObj) => {
     userObj.order_id,
     userObj.unit_price,
   ];
-  console.log(userObj);
+  console.log("orderdetail", userObj);
   let queryString = `INSERT INTO orders_details (product_id, order_id,order_id,unit_price) 
       VALUES ($1,$2,$3,$4,$5) RETURNING *;`;
 

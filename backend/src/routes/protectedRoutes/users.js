@@ -51,7 +51,7 @@ module.exports = (db) => {
     postUser(user)
       .then((resDB) => {
         // res.json(resDB.id);
-        console.log(resDB);
+        console.log("users", resDB);
         if (resDB > 0) {
           // res.send("c'est ok");
           jwt.sign(user, process.env.Acces_Token_Secret, (err, token) => {

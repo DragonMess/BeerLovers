@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios, * as others from "axios";
 
 export default function useApplicationData() {
-  let [idUser, setIdUser] = useState("");
   const [validate, setValidate] = useState(false);
   const [state, setState] = useState({
     products: [],
@@ -11,22 +10,24 @@ export default function useApplicationData() {
     orders: [],
     orders_details: [],
   });
-  console.log(idUser);
+  const userID = localStorage.getItem("UserId");
+  console.log(userID);
+  const TOKEN_STRING = localStorage.getItem("UserLogin");
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3002/products", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("UserLogin")}`,
+          Authorization: `Bearer ${TOKEN_STRING}`,
         },
       }),
       axios.get("http://localhost:3002/breweries", {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("UserLogin")}`,
+          Authorization: `Bearer ${TOKEN_STRING}`,
         },
       }),
-      axios.get(`http://localhost:3002/favourites/:${idUser}`, {
+      axios.get(`http://localhost:3002/favourites/${userID}`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("UserLogin")}`,
+          Authorization: `Bearer ${TOKEN_STRING}`,
         },
       }),
     ]).then((all) => {
@@ -53,7 +54,7 @@ export default function useApplicationData() {
         if (res.data.message !== "404") {
           // le backend doit te renvoyer le token
           localStorage.setItem("UserLogin", res.data.token);
-          setIdUser(res.data.id);
+          localStorage.setItem("UserId", res.data.id);
           setValidate(true);
         }
       })
@@ -67,6 +68,7 @@ export default function useApplicationData() {
     })
       .then((res) => {
         localStorage.removeItem("UserLogin");
+        localStorage.removeItem("UserId");
       })
       .catch((err) => console.log(err));
   }
@@ -85,7 +87,7 @@ export default function useApplicationData() {
         if (res.data.message !== "404") {
           // le backend doit te renvoyer le token
           localStorage.setItem("UserLogin", res.data.token);
-          setIdUser(res.data.id);
+          localStorage.setItem("UserId", res.data.id);
           setValidate(true);
         }
       })

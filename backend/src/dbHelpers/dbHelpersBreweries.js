@@ -26,7 +26,7 @@ const postBreweries = (userObj) => {
     userObj.coordinates_x,
     userObj.coordinates_y,
   ];
-  console.log(userObj);
+  console.log("userObj", userObj);
   let queryString = `INSERT INTO Breweries (trade_name, brewer_id,logo,coordinates_x,coordinates_y) 
       VALUES ($1,$2,$3,$4,$5) RETURNING *;`;
 
