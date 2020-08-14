@@ -21,7 +21,7 @@ module.exports = (db) => {
   });
 
   router.post("/logout", (req, res) => {
-    res.json({ token: "" });
+    res.json({ message: "404" });
   });
 
   router.post("/register", (req, res) => {
@@ -33,22 +33,27 @@ module.exports = (db) => {
       password: req.body.password,
     };
     // returning the user id to the client
-    postUserRegister(user)
+    getUserByUserEmail(user.email)
       .then((resDB) => {
-        res.json(resDB.id);
-        // console.log(resDB);
+        // res.json(resDB.id);
+        if (resDB.length > 0) {
+          // res.send("c'est ok");
+          res.json({ message: "404" });
+        } else {
+          postUserRegister(user)
+            .then((resD) => {
+              // res.json(resDB.id);
+              jwt.sign(user, process.env.Acces_Token_Secret, (err, token) => {
+                res.json({ message: "200", token: token, id: resD[0].id });
+              });
+            })
+            .catch((err) => console.log(err));
+        }
       })
       .catch((err) => console.log(err));
   });
 
   router.post("/login", (req, res) => {
-    // get obj with req.body
-    // const password = req.body.password;
-    // console.log(password);
-    // // const password = "123";
-
-    // const hashedPassword = bcrypt.hashSync(password, 10);
-    // console.log(hashedPassword);
     const user = {
       email: req.body.email,
       password: req.body.password,
@@ -56,16 +61,13 @@ module.exports = (db) => {
     postUserLogin(user)
       .then((resDB) => {
         // res.json(resDB.id);
-        console.log(resDB);
-        if (resDB > 0) {
+        if (resDB.length > 0) {
           // res.send("c'est ok");
           jwt.sign(user, process.env.Acces_Token_Secret, (err, token) => {
-            res.json({ token: token });
-            console.log(res.headers);
+            res.json({ token: token, id: resDB[0].id });
           });
         } else {
-          res.send("nooooo !!");
-          // res.json({ message: "Sorry those credentials are wrong" });
+          res.json({ message: "404" });
         }
       })
       .catch((err) => console.log(err));

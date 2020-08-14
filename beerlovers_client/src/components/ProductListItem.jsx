@@ -4,7 +4,7 @@ import styleComponents from "../styledComponents/styleComponent";
 const { Styles } = styleComponents();
 
 const ProductListItem = (props) => {
-  const { id, name, price, rate, findIdBeer, dataProduct } = props;
+  const { name, price, rate, findIdBeer, dataProduct } = props;
   return (
     <Styles>
       <section className="beerSection" onClick={(e) => findIdBeer(dataProduct)}>

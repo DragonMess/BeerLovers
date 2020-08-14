@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styleCart from "../styledComponents/styleCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Row, Col, FormControl } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 const { Styles } = styleCart();
 

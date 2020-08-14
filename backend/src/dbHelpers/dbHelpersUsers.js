@@ -23,7 +23,7 @@ const postUserRegister = (userObj) => {
 
   let queryString = `INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING *;`;
 
-  return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows);
 };
 
 const postUserLogin = (userObj) => {
@@ -32,7 +32,7 @@ const postUserLogin = (userObj) => {
 
   let queryString = `SELECT * from users WHERE (email= $1 and password=$2) ;`;
 
-  return db.query(queryString, userValues).then((dbRes) => dbRes.rows.length);
+  return db.query(queryString, userValues).then((dbRes) => dbRes.rows);
 };
 
 const deleteUser = (idObj) => {

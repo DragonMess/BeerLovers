@@ -1,13 +1,10 @@
 import "./App.css";
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./components/Navigation";
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
 import NavigationBotton from "./components/NavigationBotton";
 import Home from "./Home";
 import MapProducts from "./MapProducts";
@@ -26,12 +23,23 @@ function App() {
         <Navigation />
         <Router>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/Login" component={Login} />
-            <Route path="/Register" component={Register} />
-            <Route path="/MapProducts" component={MapProducts} />
-            <Route path="/Products" component={Products} />
-            <Route path="/Cart" component={Cart} />
+            <PublicRoute restricted={false} component={Home} path="/" exact />
+            <PublicRoute
+              restricted={false}
+              component={Login}
+              path="/Login"
+              exact
+            />
+            <PublicRoute
+              restricted={false}
+              component={Register}
+              path="/Register"
+              exact
+            />
+            <PrivateRoute component={MapProducts} path="/MapProducts" exact />
+            <PrivateRoute component={Products} path="/Products" exact />
+            <PrivateRoute component={Cart} path="/Cart" exact />
+
             <Route path="/NoMatch" component={NoMatch} />
 
             {/* <Route path="/Breweries" component={Breweries} /> */}

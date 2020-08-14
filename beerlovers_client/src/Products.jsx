@@ -20,6 +20,7 @@ const Products = () => {
     transition(PRODUCT_DESCRIPTION);
   };
   const { state, setState } = useApplication();
+
   const { mode, transition, back } = useVisualMode(
     !filterBeer ? PRODUCT_TYPES : PRODUCTLIST
   );
