@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import useApplication from "./hooks/useApplicationData";
-import { isLogin } from "../src/helpers/isLogIn";
 
 const Login = (props) => {
-  const { signIn, logout } = useApplication();
+  const { signIn, logout, validate } = useApplication();
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,7 +15,7 @@ const Login = (props) => {
         email: textEmail,
         password: textPassword,
       });
-      const validate = isLogin();
+
       if (!validate) {
         props.history.push("/");
       } else {

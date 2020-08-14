@@ -20,7 +20,7 @@ const Register = (props) => {
       });
       const validate = isLogin();
       console.log(validate);
-      if (validate) {
+      if (!validate) {
         props.history.push("/");
       } else {
         setTextName("");

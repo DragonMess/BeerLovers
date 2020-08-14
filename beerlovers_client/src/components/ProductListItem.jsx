@@ -16,12 +16,13 @@ const ProductListItem = (props) => {
         <hr className="line" />
         <div className="nameProduct">
           <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
+          {/* <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
           <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
           <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
-          <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
-          <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
+          <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} /> */}
           <h4 className="starProduct">{rate} / 5</h4>
-          <h4>Price ${(Math.round(price * 100) / 100).toFixed(2)}</h4>
+          <h4>{price}</h4>
+          {/* <h4>Price ${(Math.round(price * 100) / 100).toFixed(2)}</h4> */}
         </div>
       </section>
     </Styles>

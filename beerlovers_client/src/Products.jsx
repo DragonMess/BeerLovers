@@ -47,14 +47,3 @@ const Products = () => {
   );
 };
 export default Products;
-
-// id: 1,
-//   product_name: "Samuel Adams Noble Pils",
-//     product_type: "Amber",
-//       unit_price: 11,
-//         alcohol: 5.7,
-//           IBU: 19,
-//             EBC: 13,
-//               stock_quantity: 13,
-//                 brewerY_ID: 1,
-//                   rate: 5,

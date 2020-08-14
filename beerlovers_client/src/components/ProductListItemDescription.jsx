@@ -6,7 +6,7 @@ const { Styles } = styleComponents();
 
 const ProductListItemDescription = (props) => {
   const stock = props.children[1].stock_quantity;
-
+  const imageSrc = `./images/${props.children[1].product_type}1.png`;
   const [beerQty, setBeerQty] = useState(1);
   const handleIncreaseQty = (e) => {
     if (beerQty < stock) {
@@ -18,26 +18,25 @@ const ProductListItemDescription = (props) => {
       setBeerQty(beerQty - 1);
     }
   };
-  // console.log(props.children[1]);
+  {
+  }
   return (
     <Styles>
       <section className="beerDescriptionSection">
         <div className="HeaderProductDescription">
-          <img
-            className="beerImage"
-            src="./images/blonde1.png"
-            alt="beerType"
-          ></img>
+          <img className="beerImage" src={imageSrc} alt="beerType"></img>
           <div>
-            <FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />
-            <FontAwesomeIcon className="heartIcon" icon={["far", "hearts"]} />
+            {/* <FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />
+            <FontAwesomeIcon className="heartIcon" icon={["far", "hearts"]} /> */}
             <h3 className="nameProductDescription">
               {props.children[1].product_name}
             </h3>
             <div className="nameProduct">
-              <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
+              <Row>
+                <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
 
-              <h4 className="starProduct">{props.children[1].rate}/ 5</h4>
+                <h4 className="starProduct">{props.children[1].rate}/ 5</h4>
+              </Row>
             </div>
           </div>
         </div>
@@ -81,10 +80,11 @@ const ProductListItemDescription = (props) => {
               <b>Price</b>
             </div>
             <div className="compositionValue">
-              $
+              {/* $
               {(Math.round(props.children[1].unit_price * 100) / 100).toFixed(
                 2
-              )}
+              )} */}
+              {props.children[1].unit_price}
             </div>
           </div>
           <hr className="line" />
