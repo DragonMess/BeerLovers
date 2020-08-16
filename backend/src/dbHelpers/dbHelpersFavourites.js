@@ -1,4 +1,12 @@
 const db = require("../db/db");
+
+const getFavourites = function (db) {
+  return db
+    .query(`SELECT * FROM Favourites`)
+    .then((res) => res.rows)
+    .catch((err) => console.log(err));
+};
+
 // product_id, user_id;
 const getFavouritesByUserId = function (idObj) {
   let userValues = [idObj];
@@ -40,4 +48,5 @@ module.exports = {
   postFavourites,
   deleteFavourites,
   editFavourites,
+  getFavourites,
 };

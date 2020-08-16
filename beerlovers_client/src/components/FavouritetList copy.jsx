@@ -1,15 +1,19 @@
 import React from "react";
 import ProductListItem from "./ProductListItem";
 import styleComponents from "../styledComponents/styleComponent";
-import { filterBeer } from "../helpers/selectors";
+import { filterFavouriteBeers } from "../helpers/selectors";
+import useApplication from "../hooks/useApplicationData";
 const { Styles } = styleComponents();
 
-const ProductList = (props) => {
-  const { products, beerType, findIdBeer } = props;
-
-  const brewerId = localStorage.getItem("brewerId");
-  const productByType = filterBeer(products, beerType, brewerId);
-
+const FavouriteList = (props) => {
+  console.log(props);
+  const { state, setState } = useApplication();
+  console.log(state);
+  const { findIdBeer } = props;
+  const UserId = localStorage.getItem("UserId");
+  console.log(UserId);
+  const productByType = filterFavouriteBeers(state, UserId);
+  console.log(productByType);
   const beers = productByType
     ? productByType.map((dataProduct) => {
         return (
@@ -30,10 +34,10 @@ const ProductList = (props) => {
   return (
     <Styles>
       <div>
-        <h2 className="beerType"> {beerType}</h2>
+        <h2 className="">Your Favourites Beers</h2>
       </div>
       <section className="beerList">{beers}</section>
     </Styles>
   );
 };
-export default ProductList;
+export default FavouriteList;

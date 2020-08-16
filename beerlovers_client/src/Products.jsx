@@ -3,14 +3,18 @@ import useVisualMode from "./hooks/useMode";
 import ProductsFilter from "./components/ProductsFilter";
 import ProductList from "./components/ProductList";
 import ProductListItemDescription from "./components/ProductListItemDescription";
+import FavouriteList from "./components/FavouritetList";
+
 import useApplication from "./hooks/useApplicationData";
 
-const Products = () => {
+const Products = (props) => {
   const PRODUCTLIST = "PRODUCTLIST";
   const PRODUCT_DESCRIPTION = "PRODUCT_DESCRIPTION";
   const PRODUCT_TYPES = "PRODUCT_TYPES";
+  const FAVOURITELIST = "FAVOURITELIST";
   const [filterBeer, setFilterBeer] = useState(null);
   const [beer, setBeer] = useState(null);
+
   const filterbyType = (type) => {
     setFilterBeer(type);
     transition(PRODUCTLIST);
@@ -43,6 +47,7 @@ const Products = () => {
       {mode === PRODUCT_DESCRIPTION && (
         <ProductListItemDescription>beer={beer}</ProductListItemDescription>
       )}
+      {mode === FAVOURITELIST && <FavouriteList findIdBeer={findIdBeer} />}
     </div>
   );
 };

@@ -11,7 +11,6 @@ export default function useApplicationData() {
     orders_details: [],
   });
   const userID = localStorage.getItem("UserId");
-  console.log(userID);
   const TOKEN_STRING = localStorage.getItem("UserLogin");
   useEffect(() => {
     Promise.all([
@@ -25,7 +24,7 @@ export default function useApplicationData() {
           Authorization: `Bearer ${TOKEN_STRING}`,
         },
       }),
-      axios.get(`http://localhost:3002/favourites/${userID}`, {
+      axios.get(`http://localhost:3002/favourites`, {
         headers: {
           Authorization: `Bearer ${TOKEN_STRING}`,
         },

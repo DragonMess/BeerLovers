@@ -7,9 +7,17 @@ const {
   postFavourites,
   deleteFavourites,
   editFavourites,
+  getFavourites,
 } = require("../../dbHelpers/dbHelpersFavourites");
 
 module.exports = (db) => {
+  /* GET all Breweries */
+  router.get("/", (req, res) => {
+    getFavourites(db)
+      .then((resDB) => res.json(resDB))
+      .catch((err) => console.log(err));
+  });
+
   /* GET all Favourites */
   router.get("/:user_id", (req, res) => {
     const idObj = Number(req.params.user_id);

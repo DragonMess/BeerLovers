@@ -18,8 +18,26 @@ const ProductListItemDescription = (props) => {
       setBeerQty(beerQty - 1);
     }
   };
-  {
-  }
+
+  const itemCart = {
+    idProduct: props.children[1].id,
+    qty: beerQty,
+    price: props.children[1].unit_price,
+    name: props.children[1].product_name,
+  };
+
+  console.log(itemCart);
+  const handleAddToCart = (e) => {
+    // localStorage.getItem("UserId");
+    // localStorage.removeItem("UserId");
+
+    localStorage.setItem("cartItem", {
+      idProduct: props.children[1].id,
+      qty: beerQty,
+      price: props.children[1].unit_price,
+      name: props.children[1].product_name,
+    });
+  };
   return (
     <Styles>
       <section className="beerDescriptionSection">
@@ -66,13 +84,13 @@ const ProductListItemDescription = (props) => {
             <div className="typeComposition">
               <b>IBU</b>
             </div>
-            <div className="compositionValue">{props.children[1].IBU}</div>
+            <div className="compositionValue">{props.children[1].ibu}</div>
           </div>
           <div className="productComposition">
             <div className="typeComposition">
               <b>EBC</b>
             </div>
-            <div className="compositionValue">{props.children[1].EBC}</div>
+            <div className="compositionValue">{props.children[1].ebc}</div>
           </div>
           <hr className="line" />
           <div className="productComposition">
@@ -80,10 +98,6 @@ const ProductListItemDescription = (props) => {
               <b>Price</b>
             </div>
             <div className="compositionValue">
-              {/* $
-              {(Math.round(props.children[1].unit_price * 100) / 100).toFixed(
-                2
-              )} */}
               {props.children[1].unit_price}
             </div>
           </div>
@@ -120,7 +134,9 @@ const ProductListItemDescription = (props) => {
             </Row>
           </Col>
           <Col xs={6}>
-            <Button className="cart-btn">ADD TO CART</Button>{" "}
+            <Button className="cart-btn" onClick={handleAddToCart}>
+              ADD TO CART
+            </Button>{" "}
           </Col>
         </Row>
         <hr className="line" />
@@ -161,3 +177,7 @@ const ProductListItemDescription = (props) => {
   );
 };
 export default ProductListItemDescription;
+
+// const userID = localStorage.getItem("UserId");
+// localStorage.setItem("UserId", res.data.id);
+// localStorage.removeItem("UserId");

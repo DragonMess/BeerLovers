@@ -19,11 +19,14 @@ const CartListItem = () => {
       setBeerQty(beerQty - 1);
     }
   };
+
+  const itemCart = JSON.parse(localStorage.getItem("itemCart"));
+  console.log(itemCart);
   return (
     <Styles>
       <Row className="item-tr">
         <Col className="colProduct" xs={1}>
-          <img className="img-item" src="./images/blonde1.png" />
+          <img className="img-item" src="./images/Blonde1.png" />
         </Col>
         <Col className="item-name" xs={5}>
           <h6>Samuel Adams Noble Pils</h6>

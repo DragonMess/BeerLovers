@@ -51,7 +51,7 @@ const Home = () => {
   return (
     <Styles>
       <section className="mainLogo">
-        <img className="logos" src="images/logo-1.jpg" alt="logoBeer" />
+        <img className="logos" src="images/Logo-Beer.png" alt="logoBeer" />
       </section>
       <Container>
         <Row>

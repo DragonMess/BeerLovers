@@ -1,14 +1,45 @@
-import React from "react";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Col } from "react-bootstrap";
 import styleComponents from "../styledComponents/styleComponent";
 const { Styles } = styleComponents();
 
 const ProductsFilter = (props) => {
+  const brewerId = localStorage.getItem("brewerId");
+  const [brewer, setbrewer] = useState(brewerId);
+  const [isFiltered, setFiltered] = useState(true);
+
+  const handleFiltered = (event) => {
+    // console.log(event.target.checked);
+    // set true or false
+    setFiltered(!isFiltered);
+    // call fct and send (true/false , id)
+    setbrewer(null);
+    localStorage.removeItem("brewerId");
+  };
+
   const { filterbyType } = props;
+
   return (
     <Styles>
+      {brewer ? (
+        <form>
+          <label className="">Filtered by Selected Brewer in Map .</label>
+          <input
+            className="checkbox"
+            type="checkbox"
+            checked={isFiltered}
+            onChange={handleFiltered}
+            name="task-chk"
+          />
+        </form>
+      ) : (
+        <h6 className="">To Filter by Brewer go to the Map</h6>
+      )}
       <div>
-        <h2> Traditional Beers</h2>
+        <Col>
+          <h2> Traditional Beers</h2>
+          <h3> Brewery: Traditional Beers</h3>
+        </Col>
       </div>
       <section className="traditionalBeers">
         <Button className="Beers-btn" onClick={(e) => filterbyType("Blonde")}>

@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import NavigationBotton from "./components/NavigationBotton";
 import Home from "./Home";
 import MapProducts from "./MapProducts";
+import Favourites from "./components/FavouritetList.jsx";
 import Login from "./Login";
 import Products from "./Products";
 import Register from "./Register";
@@ -37,6 +38,7 @@ function App() {
               exact
             />
             <PrivateRoute component={MapProducts} path="/MapProducts" exact />
+            <PrivateRoute component={Favourites} path="/Favourites" exact />
             <PrivateRoute component={Products} path="/Products" exact />
             <PrivateRoute component={Cart} path="/Cart" exact />
 

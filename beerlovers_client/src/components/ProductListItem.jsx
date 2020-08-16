@@ -4,7 +4,7 @@ import styleComponents from "../styledComponents/styleComponent";
 const { Styles } = styleComponents();
 
 const ProductListItem = (props) => {
-  const { name, price, rate, findIdBeer, dataProduct } = props;
+  const { name, price, rate, findIdBeer, dataProduct, type } = props;
   return (
     <Styles>
       <section className="beerSection" onClick={(e) => findIdBeer(dataProduct)}>
@@ -15,12 +15,16 @@ const ProductListItem = (props) => {
         </div>
         <hr className="line" />
         <div className="nameProduct">
-          <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
+          <FontAwesomeIcon
+            className="starIcon"
+            icon={["fas", "star"]}
+          ></FontAwesomeIcon>
           {/* <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
           <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
           <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} />
           <FontAwesomeIcon className="starIcon" icon={["fas", "star"]} /> */}
           <h4 className="starProduct">{rate} / 5</h4>
+          <h4>{type}</h4>
           <h4>{price}</h4>
           {/* <h4>Price ${(Math.round(price * 100) / 100).toFixed(2)}</h4> */}
         </div>
