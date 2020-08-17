@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useApplication from "./hooks/useApplicationData";
 import CartListItem from "./components/CartListItem";
 import { Row, Col, Button } from "react-bootstrap";
 import styleCart from "./styledComponents/styleCart";
@@ -8,8 +7,24 @@ const { Styles } = styleCart();
 
 const Cart = () => {
   const [modalShow, setModalShow] = useState(false);
-  const { state, setState } = useApplication();
-
+  // JSON.parse(localStorage.getItem("cartItem"));
+  // localStorage.removeItem("cart");
+  const cartItems = JSON.parse(localStorage.getItem("cart"));
+  const cart = cartItems
+    ? cartItems.map((item, index) => {
+        return (
+          <CartListItem
+            key={index}
+            idProduct={item.idProduct}
+            qty={item.qty}
+            price={item.price}
+            name={item.name}
+            type={item.type}
+            stock={item.stock}
+          />
+        );
+      })
+    : undefined;
   return (
     <Styles>
       <article className="articleCart">
@@ -25,7 +40,7 @@ const Cart = () => {
           </Col>
         </Row>
         <hr className="line" />
-        <CartListItem></CartListItem>
+        {cart}
         <section>
           <Button
             className="btn-secondary"

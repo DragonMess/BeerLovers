@@ -5,10 +5,13 @@ import { Row, Col } from "react-bootstrap";
 
 const { Styles } = styleCart();
 
-const CartListItem = () => {
-  const stock = 5;
-  const priceUnit = 9.0;
-  const [beerQty, setBeerQty] = useState(1);
+// JSON.parse(localStorage.getItem("cartItem"));
+// localStorage.removeItem("cartItem");
+
+const CartListItem = (props) => {
+  const { idProduct, qty, price, name, type, stock } = props;
+
+  const [beerQty, setBeerQty] = useState(qty);
   const handleIncreaseQty = (e) => {
     if (beerQty < stock) {
       setBeerQty(beerQty + 1);
@@ -19,21 +22,25 @@ const CartListItem = () => {
       setBeerQty(beerQty - 1);
     }
   };
+  const imageSrc = `./images/${type}1.png`;
+  // convert price txt money to number float
+  const currency = price;
+  currency.replace(/[$,]+/g, "");
+  const priceNumber = parseFloat(currency);
+  // const itemCart = JSON.parse(localStorage.getItem("itemCart"));
 
-  const itemCart = JSON.parse(localStorage.getItem("itemCart"));
-  console.log(itemCart);
   return (
     <Styles>
       <Row className="item-tr">
         <Col className="colProduct" xs={1}>
-          <img className="img-item" src="./images/Blonde1.png" />
+          <img className="img-item" src={imageSrc} />
         </Col>
         <Col className="item-name" xs={5}>
-          <h6>Samuel Adams Noble Pils</h6>
+          <h6>{name}</h6>
           <hr className="line" />
-          <h7>price: ${priceUnit}</h7>
+          <h5>price: {price}</h5>
           <br />
-          <h7>stock: {stock}</h7>
+          <h5>stock: {stock}</h5>
         </Col>
 
         <Col xs={1}>
@@ -55,12 +62,12 @@ const CartListItem = () => {
           </button>
         </Col>
         <Col className="colQty" xs={2}>
-          <input className="form-control" type="text" value={beerQty} />
+          <h4>{beerQty}</h4>
         </Col>
         <Col className="colPrice" xs={2}>
-          <h7 className="txtPrice">
-            ${(Math.round(priceUnit * beerQty * 100) / 100).toFixed(2)}
-          </h7>
+          <h5 className="txtPrice">
+            {(Math.round(priceNumber * beerQty * 100) / 100).toFixed(2)}$
+          </h5>
         </Col>
       </Row>
       <hr className="line" />

@@ -7,7 +7,9 @@ const { Styles } = styleComponents();
 const ProductListItemDescription = (props) => {
   const stock = props.children[1].stock_quantity;
   const imageSrc = `./images/${props.children[1].product_type}1.png`;
-  const [beerQty, setBeerQty] = useState(1);
+  const [beerQty, setBeerQty] = useState(0);
+
+  // functions to increse or drecrease beer qty to add to the cart
   const handleIncreaseQty = (e) => {
     if (beerQty < stock) {
       setBeerQty(beerQty + 1);
@@ -18,25 +20,35 @@ const ProductListItemDescription = (props) => {
       setBeerQty(beerQty - 1);
     }
   };
-
+  // object to add in localstorage
   const itemCart = {
     idProduct: props.children[1].id,
     qty: beerQty,
     price: props.children[1].unit_price,
     name: props.children[1].product_name,
+    type: props.children[1].product_type,
+    stock: props.children[1].stock_quantity,
   };
 
-  console.log(itemCart);
+  // add the items in an array of object in localstorage
+  // to have acces in cart component
   const handleAddToCart = (e) => {
-    // localStorage.getItem("UserId");
-    // localStorage.removeItem("UserId");
-
-    localStorage.setItem("cartItem", {
-      idProduct: props.children[1].id,
-      qty: beerQty,
-      price: props.children[1].unit_price,
-      name: props.children[1].product_name,
-    });
+    // verify if array of itmes exist
+    if (localStorage.getItem("cart") && itemCart.qty > 0) {
+      // convert to array the txt from localstorage
+      const cartArray = JSON.parse(localStorage.getItem("cart"));
+      // convert to txt the new array to localstorage
+      const cart = JSON.stringify([...cartArray, itemCart]);
+      localStorage.setItem("cart", cart);
+      setBeerQty(0);
+    }
+    if (!localStorage.getItem("cart") && itemCart.qty > 0) {
+      localStorage.setItem(`cart`, JSON.stringify([]));
+      const cartArray = JSON.parse(localStorage.getItem("cart"));
+      const cart = JSON.stringify([...cartArray, itemCart]);
+      localStorage.setItem("cart", cart);
+      setBeerQty(0);
+    }
   };
   return (
     <Styles>
@@ -108,14 +120,15 @@ const ProductListItemDescription = (props) => {
         <div>Quantity</div>
         <Row>
           <Col xs={4}>
-            <input
+            {/* <input
               type="text"
               className="input-qty"
               placeholder="Enter Qty"
               aria-label="Qty"
               aria-describedby="basic-addon1"
               value={beerQty}
-            ></input>
+            ></input> */}
+            <h2 className="input-qty">{beerQty}</h2>
           </Col>
           <Col xs={2}>
             <Row>

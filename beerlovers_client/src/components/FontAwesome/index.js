@@ -16,6 +16,7 @@ import {
   faExclamationTriangle,
   faWineBottle,
   faHeart,
+  faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -34,5 +35,6 @@ library.add(
   faMinusSquare,
   faExclamationTriangle,
   faWineBottle,
-  faHearts
+  faHearts,
+  faSignOutAlt
 );

@@ -1,7 +1,8 @@
 import React from "react";
 import { Nav, Navbar, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-
+import useApplication from "../hooks/useApplicationData";
 import { Redirect } from "react-router-dom";
 const Styles = styled.div`
   .myNav {
@@ -11,7 +12,7 @@ const Styles = styled.div`
   .navbar-brand {
     width: 175px;
     height: 30px;
-    width: 270px;
+    width: 170px;
     height: 38px;
     font-family: Metal Mania;
     font-style: normal;
@@ -20,13 +21,36 @@ const Styles = styled.div`
     line-height: 37px;
     color: white;
   }
+  .iconCart {
+    color: white;black;
+    background:
+  }
 `;
 
 const Navigation = (props) => {
+  const { logout } = useApplication();
+  const handleLogOut = (e) => {
+    e.preventDefault();
+    logout();
+    localStorage.removeItem("cart");
+    // props.history.push("/Login");
+    console.log(props);
+    // return <Redirect to="/Login" />;
+  };
   return (
     <Styles>
       <Navbar className="myNav" collapseOnSelect expand="lg">
         <Navbar.Brand href="/">BEERLOVERS</Navbar.Brand>
+        <Nav.Link className="iconCart" href="/Cart">
+          <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
+        </Nav.Link>
+        <Nav.Link className="iconCart" href="/">
+          <FontAwesomeIcon
+            onClick={handleLogOut}
+            icon={["fas", "sign-out-alt"]}
+          />
+        </Nav.Link>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
