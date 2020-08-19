@@ -64,7 +64,12 @@ module.exports = (db) => {
         if (resDB.length > 0) {
           // res.send("c'est ok");
           jwt.sign(user, process.env.Acces_Token_Secret, (err, token) => {
-            res.json({ token: token, id: resDB[0].id });
+            res.json({
+              token: token,
+              id: resDB[0].id,
+              name: resDB[0].name,
+              email: resDB[0].email,
+            });
           });
         } else {
           res.json({ message: "404" });

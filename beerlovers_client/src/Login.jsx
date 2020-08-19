@@ -42,7 +42,7 @@ const Login = (props) => {
     <div>
       <h4>Login</h4>
       <Form>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -56,7 +56,7 @@ const Login = (props) => {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"

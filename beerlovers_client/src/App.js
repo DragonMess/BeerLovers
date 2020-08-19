@@ -14,6 +14,7 @@ import Products from "./Products";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
 import Cart from "./Cart";
+import Acount from "./Account";
 
 import Layout from "./components/Layout";
 
@@ -41,6 +42,7 @@ function App() {
             <PrivateRoute component={Favourites} path="/Favourites" exact />
             <PrivateRoute component={Products} path="/Products" exact />
             <PrivateRoute component={Cart} path="/Cart" exact />
+            <PrivateRoute component={Acount} path="/Acount" exact />
 
             <Route path="/NoMatch" component={NoMatch} />
 

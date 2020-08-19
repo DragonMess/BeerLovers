@@ -21,6 +21,18 @@ export function filterFavouriteBeers(state, idUser) {
 
   return beersFilteredFavourites;
 }
+
+export function filterProductsByUser(state, idUser) {
+  const filterProducts = [];
+
+  for (let product of state.products) {
+    if (product.brewery_id == idUser) {
+      filterProducts.push(product);
+    }
+  }
+  return filterProducts;
+}
+
 // product_name, product_type, unit_price, alcohol, ibu, ebc, stock_quantity, brewerY_ID, rate, img
 export function filterBeer(state, type, idBrewery) {
   const brewer = localStorage.getItem("brewerId");
@@ -51,17 +63,21 @@ export function filterBeer(state, type, idBrewery) {
   return beersFiltered;
 }
 
-// =======Data in localstorage=========
-// [
-//   { id: 0, firstname: "test", lastname: "test", email: "test@test.com" },
-//   { id: 1, firstname: "demo", lastname: "demo", email: "demo@demo.com" },
-// ];
-// =======Easy way to get data from localstorage=========
-// var users = JSON.parse(localStorage.getItem("key_users"));
-// var user0 = users[0];
 // =======function with filter=========
 export function getUserById(id) {
   return JSON.parse(localStorage.getItem("users")).filter(
     (users) => users.id === id
   );
+}
+
+export function findBreweryName(state, idUser) {
+  let breweryName;
+
+  for (let brewer of state.breweries) {
+    if (brewer.brewer_id == idUser) {
+      breweryName = brewer.trade_name;
+    }
+  }
+
+  return breweryName;
 }

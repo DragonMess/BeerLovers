@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios, * as others from "axios";
+import { findBreweryName } from "../helpers/selectors";
 
 export default function useApplicationData() {
   const [validate, setValidate] = useState(false);
@@ -54,6 +55,8 @@ export default function useApplicationData() {
           // le backend doit te renvoyer le token
           localStorage.setItem("UserLogin", res.data.token);
           localStorage.setItem("UserId", res.data.id);
+          localStorage.setItem("UserName", res.data.name);
+          localStorage.setItem("UserEmail", res.data.email);
           setValidate(true);
         }
       })
@@ -68,6 +71,8 @@ export default function useApplicationData() {
       .then((res) => {
         localStorage.removeItem("UserLogin");
         localStorage.removeItem("UserId");
+        localStorage.removeItem("UserName");
+        localStorage.removeItem("UserEmail");
       })
       .catch((err) => console.log(err));
   }
@@ -87,12 +92,81 @@ export default function useApplicationData() {
           // le backend doit te renvoyer le token
           localStorage.setItem("UserLogin", res.data.token);
           localStorage.setItem("UserId", res.data.id);
+          localStorage.setItem("UserName", res.data.name);
+          localStorage.setItem("UserEmail", res.data.email);
           setValidate(true);
         }
       })
       .catch((err) => console.log(err));
   }
+  function UserUpDateInfo(
+    userId,
+    userName,
+    userEmail,
+    userPassword,
+    userBrewerName
+  ) {
+    const user = {
+      id: userId,
+      name: userName,
+      email: userEmail,
+      password: userPassword,
+      brewerName: userBrewerName,
+    };
+    axios({
+      url: `http://localhost:3002/users/:${userID}`,
+      headers: {
+        Authorization: `Bearer ${TOKEN_STRING}`,
+      },
+      method: "PUT",
+      data: user,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
 
+  function ProductUpDate(
+    alcohol,
+    brewery_id,
+    ebc,
+    ibu,
+    id,
+    img,
+    product_name,
+    product_type,
+    stock_quantity,
+    rate,
+    unit_price
+  ) {
+    const product = {
+      alcohol,
+      brewery_id,
+      ebc,
+      ibu,
+      id,
+      img,
+      product_name,
+      product_type,
+      stock_quantity,
+      rate,
+      unit_price,
+    };
+    console.log(product);
+    axios({
+      url: `http://localhost:3002/products/:${id}`,
+      headers: {
+        Authorization: `Bearer ${TOKEN_STRING}`,
+      },
+      method: "PUT",
+      data: product,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
   // ======== return functions ==========
 
   return {
@@ -102,116 +176,7 @@ export default function useApplicationData() {
     logout,
     register,
     validate,
+    UserUpDateInfo,
+    ProductUpDate,
   };
 }
-
-// products: [
-//   {
-//     id: 1,
-//     product_name: "Samuel Adams Noble Pils",
-//     product_type: "Amber",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 5,
-//   },
-//   {
-//     id: 2,
-//     product_name: "Samuel Adams Cherry Wheat",
-//     product_type: "Blonde",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 3,
-//   },
-//   {
-//     id: 3,
-//     product_name: "Happy Heron Pale Ale",
-//     product_type: "Blonde",
-//     unit_price: 12,
-//     alcohol: 6.0,
-//     IBU: 11,
-//     EBC: 10,
-//     stock_quantity: 13,
-//     brewerY_ID: 2,
-//     rate: 2,
-//   },
-//   {
-//     id: 4,
-//     product_name: "Atlantic Pale",
-//     product_type: "Blonde",
-//     unit_price: 17,
-//     alcohol: 5.9,
-//     IBU: 19,
-//     EBC: 9,
-//     stock_quantity: 1,
-//     brewerY_ID: 3,
-//     rate: 5,
-//   },
-//   {
-//     id: 5,
-//     product_name: "Warminster Special Bitter",
-//     product_type: "White",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 1,
-//   },
-//   {
-//     id: 6,
-//     product_name: "Birra buena",
-//     product_type: "IPA",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 1,
-//   },
-//   {
-//     id: 7,
-//     product_name: "Stella",
-//     product_type: "Brown",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 1,
-//   },
-//   {
-//     id: 8,
-//     product_name: "Corona Special",
-//     product_type: "Alambra",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 1,
-//   },
-//   {
-//     id: 9,
-//     product_name: "The best beer",
-//     product_type: "Siracoli",
-//     unit_price: 11,
-//     alcohol: 5.7,
-//     IBU: 19,
-//     EBC: 13,
-//     stock_quantity: 13,
-//     brewerY_ID: 1,
-//     rate: 1,
-//   },
-// ],

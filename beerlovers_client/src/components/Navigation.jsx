@@ -77,6 +77,9 @@ const Navigation = (props) => {
             <Nav.Link className="navLink" href="/Register">
               Register
             </Nav.Link>
+            <Nav.Link className="navLink" href="/Acount">
+              Acount
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -76,7 +76,7 @@ module.exports = (db) => {
 
   router.put("/:id", (req, res) => {
     const UserObj = req.body;
-    // console.log(UserOb);
+    console.log(UserOb);
     editUser(UserObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));

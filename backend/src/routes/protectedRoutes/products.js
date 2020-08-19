@@ -41,7 +41,7 @@ module.exports = (db) => {
 
   router.put("/:id", (req, res) => {
     const productObj = req.body;
-    // console.log(productOb);
+    console.log(req.body);
     editProduct(productObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));

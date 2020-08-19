@@ -49,7 +49,7 @@ const Register = (props) => {
       <h4>Register</h4>
 
       <Form>
-        <Form.Group>
+        <Form.Group controlId="formName">
           <Form.Label>Name:</Form.Label>
           <Form.Control
             type="name"
@@ -60,7 +60,7 @@ const Register = (props) => {
           />
           <Form.Text className="text-muted"></Form.Text>
         </Form.Group>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
             type="email"
@@ -74,7 +74,7 @@ const Register = (props) => {
           </Form.Text>
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
