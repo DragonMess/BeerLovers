@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useApplication from "../src/hooks/useApplicationData";
 
 const Styles = styled.div`
   .mainLogo {
@@ -48,6 +49,7 @@ const Styles = styled.div`
   }
 `;
 const Home = () => {
+  const { isLogIn } = useApplication();
   return (
     <Styles>
       <section className="mainLogo">
@@ -64,7 +66,9 @@ const Home = () => {
         </Row>
       </Container>
       <div className="bewerMap-div">
-        <Button className="bewerMap-btn">BREWER MAP</Button>
+        <Button className="bewerMap-btn" href="/MapProducts">
+          Beer Map
+        </Button>
       </div>
     </Styles>
   );

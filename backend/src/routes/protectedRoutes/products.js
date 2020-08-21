@@ -33,6 +33,7 @@ module.exports = (db) => {
 
   router.delete("/:id", (req, res) => {
     // get productid from params
+
     const idObj = Number(req.params.id);
     deleteProduct(idObj)
       .then((resDB) => res.json(resDB))

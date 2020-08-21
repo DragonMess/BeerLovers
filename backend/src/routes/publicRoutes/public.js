@@ -63,6 +63,7 @@ module.exports = (db) => {
         // res.json(resDB.id);
         if (resDB.length > 0) {
           // res.send("c'est ok");
+          // res.redirect("/");
           jwt.sign(user, process.env.Acces_Token_Secret, (err, token) => {
             res.json({
               token: token,

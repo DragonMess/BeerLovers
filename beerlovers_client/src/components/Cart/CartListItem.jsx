@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styleCart from "../styledComponents/styleCart";
+import styleCart from "../../styledComponents/styleCart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col } from "react-bootstrap";
 

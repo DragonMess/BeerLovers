@@ -1,24 +1,27 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Layout/Navigation";
 import PublicRoute from "./PublicRoute";
 import PrivateRoute from "./PrivateRoute";
-import NavigationBotton from "./components/NavigationBotton";
+import NavigationBotton from "./components/Layout/NavigationBotton";
 import Home from "./Home";
-import MapProducts from "./MapProducts";
+import MapProducts from "./components/Map/MapProducts";
 import Favourites from "./components/FavouritetList.jsx";
-import Login from "./Login";
-import Products from "./Products";
+import Login from "./components/Login/Login";
+import Products from "./components/Products/Products.jsx";
 import Register from "./Register";
 import NoMatch from "./NoMatch";
-import Cart from "./Cart";
-import Acount from "./Account";
-
-import Layout from "./components/Layout";
+import Cart from "./components/Cart/Cart";
+import Acount from "./components/Acount/Account";
+import useApplication from "./hooks/useApplicationData";
+import Layout from "./components/Layout/Layout";
 
 function App() {
+  const { signIn, logout, validate, setIsLogIn } = useApplication();
+  const [logged, setLogged] = useState(false);
+
   return (
     <>
       <Layout>
@@ -31,6 +34,7 @@ function App() {
               component={Login}
               path="/Login"
               exact
+              state={"send anything from here"}
             />
             <PublicRoute
               restricted={false}
@@ -57,23 +61,6 @@ function App() {
         <NavigationBotton fixed="bottom" />
       </Layout>
     </>
-
-    //
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
   );
 }
 

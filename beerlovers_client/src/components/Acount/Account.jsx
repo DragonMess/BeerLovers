@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import useVisualMode from "./hooks/useMode";
-import MyAcount from "./components/Acount/MyAcount.jsx";
-import MyProductsList from "./components/Acount/MyProductsList";
-import MyProductListItemDescription from "./components/Acount/MyProductListItemDescription";
+import useVisualMode from "../../hooks/useMode";
+import MyAcount from "./MyAcount";
+import MyProductsList from "./MyProductsList";
+import MyProductListItemDescription from "./MyProductListItemDescription";
 
-import useApplication from "./hooks/useApplicationData";
+import useApplication from "../../hooks/useApplicationData";
 
 const Acount = () => {
   const MYPRODUCTLIST = "MYPRODUCTLIST";

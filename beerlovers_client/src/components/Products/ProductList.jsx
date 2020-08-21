@@ -1,7 +1,7 @@
 import React from "react";
 import ProductListItem from "./ProductListItem";
-import styleComponents from "../styledComponents/styleComponent";
-import { filterBeer } from "../helpers/selectors";
+import styleComponents from "../../styledComponents/styleComponent";
+import { filterBeer } from "../../helpers/selectors";
 const { Styles } = styleComponents();
 
 const ProductList = (props) => {

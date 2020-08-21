@@ -1,5 +1,5 @@
 import React from "react";
-import ProductListItem from "./ProductListItem";
+import ProductListItem from "./Products/ProductListItem";
 import { Button, Col, Table } from "react-bootstrap";
 import styleComponents from "../styledComponents/styleComponent";
 import { filterFavouriteBeers } from "../helpers/selectors";
@@ -7,14 +7,11 @@ import useApplication from "../hooks/useApplicationData";
 const { Styles } = styleComponents();
 
 const FavouriteList = (props) => {
-  console.log(props);
   const { state, setState } = useApplication();
-  console.log(state);
   const { findIdBeer } = props;
   const UserId = localStorage.getItem("UserId");
   console.log(UserId);
   const productByType = filterFavouriteBeers(state, UserId);
-  console.log(productByType);
   const beers = productByType
     ? productByType.map((dataProduct) => {
         return (

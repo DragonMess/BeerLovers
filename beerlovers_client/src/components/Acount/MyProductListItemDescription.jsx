@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Container, Col, Row, Table, Button } from "react-bootstrap";
 import useApplication from "../../hooks/useApplicationData";
+
 export default function MyProductListItemDescription(props) {
-  const { ProductUpDate } = useApplication();
+  const { productUpDate, productDelete } = useApplication();
   const { product, comeBack } = props;
   const myId = localStorage.getItem("UserId");
   const [readOnly, setReadOnly] = useState(true);
@@ -23,7 +24,12 @@ export default function MyProductListItemDescription(props) {
     setReadOnly(false);
     setSave(true);
   };
-  console.log(props);
+
+  const handleDelete = (e) => {
+    // e.preventDefault();
+    productDelete(product.id);
+    comeBack(MYACOUNT);
+  };
   const handleSave = (e) => {
     if (
       productAlcohol &&
@@ -35,7 +41,7 @@ export default function MyProductListItemDescription(props) {
       productStock &&
       productPrice
     ) {
-      ProductUpDate(
+      productUpDate(
         productAlcohol,
         productBrewerId,
         productEBC,
@@ -193,7 +199,9 @@ export default function MyProductListItemDescription(props) {
             </Row>
             <Row>
               <Col>
-                <Button className="bg-danger text-dark">Delete</Button>
+                <Button className="bg-danger text-dark" onClick={handleDelete}>
+                  Delete
+                </Button>
               </Col>
             </Row>
           </Col>

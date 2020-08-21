@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Beerlovers
 
-## Available Scripts
+Beerlovers is a single-page aplication builded in React with some routes simulated.This application is builded to be used in mobile devices.
 
-In the project directory, you can run:
+This repository we build t a React application that allows users to find a beer home brewery in the Montreal map (Leaflet). The user can have an acount to add, modify and delete his products. THe user can find a home made beer by type the beer and selected in a list of beer to see the beer description.
+The user can buy the beer from others beers brewers. I use an API server with JWT athentification to protect the private routes. I build this project to practice React, HTML, CSS, JS,JSX, front-end skills, and Node, Express and PostgreSql back-end skills and I use Figma to the preview front end design.
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Install dependencies with `npm install`.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Running Webpack Development Server
 
-### `npm test`
+```sh
+npm start
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Final Product (iPhone X)
 
-### `npm run build`
+### Load Page
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+!["Load"](./public/Docs/LoadPage.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### TopNavBarExpanded
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+!["TopNavBarExpanded"](./public/Docs/TopNavBarExpanded.png)
 
-### `npm run eject`
+### Login
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+!["Login"](./public/Docs/Login.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### BeerMap
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+!["BeerMap"](./public/Docs/BeerMap.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### SelectedMapPoint
 
-## Learn More
+!["SelectedMapPoint."](./public/Docs/SelectedMapPoint.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Type of Beers
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+!["TypeOf Beers."](./public/Docs/TypeOfBeers.png)
 
-### Code Splitting
+### Beer List By Type: Blonde
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+!["BeerListByTypeBlonde."](./public/Docs/BeerListByTypeBlonde.png)
 
-### Analyzing the Bundle Size
+### Beer Description
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+!["BeerDescription."](./public/Docs/BeerDescription.png)
 
-### Making a Progressive Web App
+### Beer Cart
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+!["BeerCart."](./public/Docs/Cart.png)
 
-### Advanced Configuration
+### Checkout
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+!["Checkout."](./public/Docs/Checkout.png)
 
-### Deployment
+### Favourites Beers
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+!["FavouritesBeers"](./public/Docs/FavouritesBeers.png)

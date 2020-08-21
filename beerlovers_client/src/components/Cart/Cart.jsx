@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import CartListItem from "./components/CartListItem";
+import CartListItem from "./CartListItem";
 import { Row, Col, Button } from "react-bootstrap";
-import styleCart from "./styledComponents/styleCart";
-import CartCheckout from "./components/CartCheckout";
+import styleCart from "../../styledComponents/styleCart";
+import CartCheckout from "./CartCheckout";
 const { Styles } = styleCart();
 
 const Cart = () => {
   const [modalShow, setModalShow] = useState(false);
-  // JSON.parse(localStorage.getItem("cartItem"));
-  // localStorage.removeItem("cart");
+
   const cartItems = JSON.parse(localStorage.getItem("cart"));
   const cart = cartItems
     ? cartItems.map((item, index) => {

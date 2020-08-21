@@ -1,20 +1,20 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styleComponents from "../styledComponents/styleComponent";
+import styleComponents from "../../styledComponents/styleComponent";
 const { Styles } = styleComponents();
 
 const ProductListItem = (props) => {
   const { name, price, rate, findIdBeer, dataProduct, type } = props;
   return (
     <Styles>
-      <section className="beerSection" onClick={(e) => findIdBeer(dataProduct)}>
+      <section className="beerSection">
         <div className="nameProduct">
           <h3>{name}</h3>
           <FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />
           <FontAwesomeIcon className="heartIcon" icon={["far", "hearts"]} />
         </div>
         <hr className="line" />
-        <div className="nameProduct">
+        <div className="nameProduct" onClick={(e) => findIdBeer(dataProduct)}>
           <FontAwesomeIcon
             className="starIcon"
             icon={["fas", "star"]}

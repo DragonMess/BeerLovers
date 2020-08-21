@@ -3,16 +3,21 @@ import axios, * as others from "axios";
 import { findBreweryName } from "../helpers/selectors";
 
 export default function useApplicationData() {
-  const [validate, setValidate] = useState(false);
+  let [validate, setValidate] = useState(false);
+  let [isLogIn, setIsLogIn] = useState(false);
   const [state, setState] = useState({
     products: [],
     breweries: [],
     favourites: [],
-    orders: [],
-    orders_details: [],
+    // orders: [],
+    // orders_details: [],
+    user_id:"",
+    loggedIn: false,
   });
+  let logged = false;
   const userID = localStorage.getItem("UserId");
   const TOKEN_STRING = localStorage.getItem("UserLogin");
+
   useEffect(() => {
     Promise.all([
       axios.get("http://localhost:3002/products", {
@@ -36,16 +41,20 @@ export default function useApplicationData() {
         products: all[0].data,
         breweries: all[1].data,
         favourites: all[2].data,
+        user_id: userID,
+        
       }));
     });
-  }, []);
+  }, [TOKEN_STRING, userID]);
+
 
   function signIn(userLog) {
     const user = {
       email: userLog.email,
       password: userLog.password,
     };
-    axios({
+
+    return axios({
       url: "http://localhost:3002/public/login",
       method: "POST",
       data: user,
@@ -53,15 +62,29 @@ export default function useApplicationData() {
       .then((res) => {
         if (res.data.message !== "404") {
           // le backend doit te renvoyer le token
-          localStorage.setItem("UserLogin", res.data.token);
-          localStorage.setItem("UserId", res.data.id);
-          localStorage.setItem("UserName", res.data.name);
-          localStorage.setItem("UserEmail", res.data.email);
-          setValidate(true);
+          
+          // return (
+            localStorage.setItem("UserLogin", res.data.token)
+          localStorage.setItem("UserId", res.data.id)
+          localStorage.setItem("UserName", res.data.name)
+          localStorage.setItem("UserEmail", res.data.email)
+          // setValidate(true),
+          // setIsLogIn(false))
+          //  validate = true);
+          setState((prevState) => {
+            return {
+              ...prevState,
+              user_id: res.data.id,
+              loggedIn: true,
+  
+            };
+          });
+          return (validate = true)
         }
       })
       .catch((err) => console.log(err));
   }
+
   function logout() {
     axios({
       url: "http://localhost:3002/public/logout",
@@ -73,6 +96,7 @@ export default function useApplicationData() {
         localStorage.removeItem("UserId");
         localStorage.removeItem("UserName");
         localStorage.removeItem("UserEmail");
+        setIsLogIn(false);
       })
       .catch((err) => console.log(err));
   }
@@ -95,6 +119,7 @@ export default function useApplicationData() {
           localStorage.setItem("UserName", res.data.name);
           localStorage.setItem("UserEmail", res.data.email);
           setValidate(true);
+          setIsLogIn(true);
         }
       })
       .catch((err) => console.log(err));
@@ -127,7 +152,7 @@ export default function useApplicationData() {
       .catch((err) => console.log(err));
   }
 
-  function ProductUpDate(
+  function productUpDate(
     alcohol,
     brewery_id,
     ebc,
@@ -153,7 +178,6 @@ export default function useApplicationData() {
       rate,
       unit_price,
     };
-    console.log(product);
     axios({
       url: `http://localhost:3002/products/:${id}`,
       headers: {
@@ -161,6 +185,21 @@ export default function useApplicationData() {
       },
       method: "PUT",
       data: product,
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function productDelete(id) {
+    console.log(id);
+    axios({
+      url: `http://localhost:3002/products/${id}`,
+      headers: {
+        Authorization: `Bearer ${TOKEN_STRING}`,
+      },
+      method: "DELETE",
     })
       .then((res) => {
         console.log(res);
@@ -177,6 +216,10 @@ export default function useApplicationData() {
     register,
     validate,
     UserUpDateInfo,
-    ProductUpDate,
+    productUpDate,
+    productDelete,
+    isLogIn,
+    setIsLogIn,
+    logged,
   };
 }

@@ -13,6 +13,8 @@ const Styles = styled.div`
   }
 `;
 const Layout = (props) => {
+
+
   return (
     <Styles>
       <Container className="mainContainer">{props.children}</Container>

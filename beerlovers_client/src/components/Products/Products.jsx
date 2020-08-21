@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import useVisualMode from "./hooks/useMode";
-import ProductsFilter from "./components/ProductsFilter";
-import ProductList from "./components/ProductList";
-import ProductListItemDescription from "./components/ProductListItemDescription";
-import FavouriteList from "./components/FavouritetList";
+import useVisualMode from "../../hooks/useMode";
+import ProductsFilter from "./ProductsFilter";
+import ProductList from "./ProductList";
+import ProductListItemDescription from "./ProductListItemDescription";
+import FavouriteList from "../FavouritetList";
 
-import useApplication from "./hooks/useApplicationData";
+import useApplication from "../../hooks/useApplicationData";
 
 const Products = (props) => {
   const PRODUCTLIST = "PRODUCTLIST";

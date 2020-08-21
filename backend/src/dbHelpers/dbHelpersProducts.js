@@ -62,11 +62,3 @@ module.exports = {
   deleteProduct,
   editProduct,
 };
-
-// <Route path="/" exact component={Home} />
-//     <Route path="/Login" component={Login} />
-//     <Route path="/Register" component={Register} />
-//     <Route path="/MapProducts" component={MapProducts} />
-//     <Route path="/Products" component={Products} />
-//     <Route path="/Cart" component={Cart} />
-//     <Route path="/NoMatch" component={NoMatch} />

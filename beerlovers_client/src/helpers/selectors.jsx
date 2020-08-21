@@ -21,7 +21,33 @@ export function filterFavouriteBeers(state, idUser) {
 
   return beersFilteredFavourites;
 }
+export function filterFavouriteHeart(state, idUser) {
+  // const idUser = localStorage.getItem("UserId");
+  const beersFilteredFavourites = [];
+  const favouriteId = [];
+  const heartEmpty = '<FontAwesomeIcon className="heartIcon" icon={["far", "hearts"]} />';
+  const heart = '<FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />';
 
+  if (idUser) {
+    for (let favourite of state.favourites) {
+      if (favourite.user_id == idUser) {
+        favouriteId.push(favourite.product_id);
+      }
+    }
+
+    for (let idFavourite of favouriteId) {
+      for (let product of state.products) {
+        if (product.id == idFavourite) {
+          beersFilteredFavourites.push(heart);
+        }else {
+          beersFilteredFavourites.push(heartEmpty);
+        }
+      }
+    }
+  }
+
+  return beersFilteredFavourites;
+}
 export function filterProductsByUser(state, idUser) {
   const filterProducts = [];
 
@@ -45,7 +71,6 @@ export function filterBeer(state, type, idBrewery) {
         beersFilteredByBrewer.push(product);
       }
     }
-    console.log(beersFilteredByBrewer);
     for (let beer of beersFilteredByBrewer) {
       if (beer.product_type === type) {
         beersFiltered.push(beer);

@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Button, Col } from "react-bootstrap";
-import styleComponents from "../styledComponents/styleComponent";
+import styleComponents from "../../styledComponents/styleComponent";
+import useApplication from "../../hooks/useApplicationData";
+import { findBreweryName } from "../../helpers/selectors";
 const { Styles } = styleComponents();
 
 const ProductsFilter = (props) => {
+  const { state, setState } = useApplication();
   const brewerId = localStorage.getItem("brewerId");
   const [brewer, setbrewer] = useState(brewerId);
   const [isFiltered, setFiltered] = useState(true);
-
+  const brewerName = findBreweryName(state, brewerId);
+  console.log(brewerName);
   const handleFiltered = (event) => {
     // console.log(event.target.checked);
     // set true or false
@@ -23,7 +27,7 @@ const ProductsFilter = (props) => {
     <Styles>
       {brewer ? (
         <form>
-          <label className="">Filtered by Selected Brewer in Map .</label>
+          <label>Filtered by Selected Brewer in Map</label>
           <input
             className="checkbox"
             type="checkbox"
@@ -33,12 +37,21 @@ const ProductsFilter = (props) => {
           />
         </form>
       ) : (
-        <h6 className="">To Filter by Brewer go to the Map</h6>
+        <h6></h6>
+        // <h6>To Filter by Brewer go to the Map</h6>
       )}
       <div>
         <Col>
-          <h2> Traditional Beers</h2>
-          <h3> Brewery: Traditional Beers</h3>
+          {brewer ? (
+            <div>
+              <h3>Brewer name :</h3> <h2>{brewerName}</h2>{" "}
+            </div>
+          ) : (
+            <h2>Traditional Beers</h2>
+          )}
+
+          {/* <h3>Traditional Beers</h3> */}
+          {/* <h3> Brewery: Traditional Beers</h3> */}
         </Col>
       </div>
       <section className="traditionalBeers">

@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Nav, Navbar, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
-import useApplication from "../hooks/useApplicationData";
-import { Redirect } from "react-router-dom";
+import useApplication from "../../hooks/useApplicationData";
+import { isLogin } from "../../helpers/isLogIn";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link,
+} from "react-router-dom";
 const Styles = styled.div`
   .myNav {
     margin: 0;
@@ -28,14 +36,13 @@ const Styles = styled.div`
 `;
 
 const Navigation = (props) => {
-  const { logout } = useApplication();
+  const { logout, isLogIn, state, logged, validate } = useApplication();
+  const myId = localStorage.getItem("UserId");
   const handleLogOut = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     logout();
+    // setShow(true);
     localStorage.removeItem("cart");
-    // props.history.push("/Login");
-    console.log(props);
-    // return <Redirect to="/Login" />;
   };
   return (
     <Styles>
@@ -44,12 +51,19 @@ const Navigation = (props) => {
         <Nav.Link className="iconCart" href="/Cart">
           <FontAwesomeIcon icon={["fas", "shopping-cart"]} />
         </Nav.Link>
-        <Nav.Link className="iconCart" href="/">
-          <FontAwesomeIcon
-            onClick={handleLogOut}
-            icon={["fas", "sign-out-alt"]}
-          />
-        </Nav.Link>
+        {state.user_id ? (
+          <Nav.Link className="iconCart" href="/Cart">
+            <FontAwesomeIcon
+              onClick={handleLogOut}
+              icon={["fas", "sign-out-alt"]}
+            />
+          </Nav.Link>
+        ) : (
+          <Nav.Link />
+        )}
+        {/* <Nav.Link className="iconCart" href="/Login" onClick={handleLogOut}>
+          <FontAwesomeIcon icon={["fas", "sign-out-alt"]} />
+        </Nav.Link> */}
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -60,9 +74,9 @@ const Navigation = (props) => {
             <Nav.Link className="navLink" href="/Products">
               Beers
             </Nav.Link>
-            <Nav.Link className="navLink" href="/Breweries">
+            {/* <Nav.Link className="navLink" href="/Breweries">
               Breweries
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link className="navLink" href="/Favourites">
               Favourites
             </Nav.Link>

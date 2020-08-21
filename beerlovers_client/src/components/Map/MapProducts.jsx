@@ -3,7 +3,7 @@ import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import "./Map.css";
 import { Icon } from "leaflet";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import useApplication from "./hooks/useApplicationData";
+import useApplication from "../../hooks/useApplicationData";
 const beer = new Icon({
   iconUrl: "./images/BeerIcon.svg",
   iconSize: [25, 25],
@@ -63,10 +63,3 @@ const MapProducts = () => {
   );
 };
 export default MapProducts;
-// to = {{
-//   pathname: "/Products",
-//     productdetailProps: {
-//     productdetail: 5
-//   }
-// }}
-// <Link to="/Products" brewerId={mark.brewer_id}>
