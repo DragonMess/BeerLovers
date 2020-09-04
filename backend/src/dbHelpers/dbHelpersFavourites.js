@@ -31,10 +31,10 @@ const postFavourites = (userObj) => {
 
   return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
 };
-const deleteFavourites = (idObj) => {
-  let userValues = [idObj];
+const deleteFavourites = (userObj) => {
+  const userValues = [userObj.product_id, userObj.user_id];
   let queryString = `DELETE FROM favourites
-      WHERE id = $1 RETURNING *;`;
+      WHERE (product_id = $1 AND user_id = $2 )RETURNING *;`;
   return db.query(queryString, userValues).then((dbRes) => dbRes.rows[0]);
 };
 const editFavourites = (userObj) => {

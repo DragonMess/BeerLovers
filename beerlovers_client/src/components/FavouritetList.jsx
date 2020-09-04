@@ -10,7 +10,6 @@ const FavouriteList = (props) => {
   const { state, setState } = useApplication();
   const { findIdBeer } = props;
   const UserId = localStorage.getItem("UserId");
-  console.log(UserId);
   const productByType = filterFavouriteBeers(state, UserId);
   const beers = productByType
     ? productByType.map((dataProduct) => {

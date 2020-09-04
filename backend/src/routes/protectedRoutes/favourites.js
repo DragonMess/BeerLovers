@@ -40,15 +40,15 @@ module.exports = (db) => {
       .catch((err) => console.log(err));
   });
 
-  router.delete("/:id", (req, res) => {
+  router.delete("/", (req, res) => {
     // get Favouritesid from params
-    const idObj = Number(req.params.id);
-    deleteFavourites(idObj)
+    const favouritesObj = req.body;
+    deleteFavourites(favouritesObj)
       .then((resDB) => res.json(resDB))
       .catch((err) => console.log(err));
   });
 
-  router.put("/:id", (req, res) => {
+  router.put("/", (req, res) => {
     const favouritesObj = req.body;
     // console.log(favouritesObj);
     editFavourites(favouritesObj)

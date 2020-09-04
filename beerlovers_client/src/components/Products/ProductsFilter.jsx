@@ -11,7 +11,7 @@ const ProductsFilter = (props) => {
   const [brewer, setbrewer] = useState(brewerId);
   const [isFiltered, setFiltered] = useState(true);
   const brewerName = findBreweryName(state, brewerId);
-  console.log(brewerName);
+  // console.log(brewerName);
   const handleFiltered = (event) => {
     // console.log(event.target.checked);
     // set true or false

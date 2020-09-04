@@ -5,54 +5,27 @@ export function filterFavouriteBeers(state, idUser) {
 
   if (idUser) {
     for (let favourite of state.favourites) {
-      if (favourite.user_id == idUser) {
+      if (favourite.user_id === Number(idUser)) {
         favouriteId.push(favourite.product_id);
       }
     }
 
     for (let idFavourite of favouriteId) {
       for (let product of state.products) {
-        if (product.id == idFavourite) {
+        if (product.id === Number(idFavourite)) {
           beersFilteredFavourites.push(product);
         }
       }
     }
   }
-
   return beersFilteredFavourites;
 }
-export function filterFavouriteHeart(state, idUser) {
-  // const idUser = localStorage.getItem("UserId");
-  const beersFilteredFavourites = [];
-  const favouriteId = [];
-  const heartEmpty = '<FontAwesomeIcon className="heartIcon" icon={["far", "hearts"]} />';
-  const heart = '<FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />';
 
-  if (idUser) {
-    for (let favourite of state.favourites) {
-      if (favourite.user_id == idUser) {
-        favouriteId.push(favourite.product_id);
-      }
-    }
-
-    for (let idFavourite of favouriteId) {
-      for (let product of state.products) {
-        if (product.id == idFavourite) {
-          beersFilteredFavourites.push(heart);
-        }else {
-          beersFilteredFavourites.push(heartEmpty);
-        }
-      }
-    }
-  }
-
-  return beersFilteredFavourites;
-}
 export function filterProductsByUser(state, idUser) {
   const filterProducts = [];
 
   for (let product of state.products) {
-    if (product.brewery_id == idUser) {
+    if (product.brewery_id === Number(idUser)) {
       filterProducts.push(product);
     }
   }
@@ -67,7 +40,7 @@ export function filterBeer(state, type, idBrewery) {
   const beersFilteredByBrewer = [];
   if (brewer) {
     for (let product of state.products) {
-      if (product.brewery_id == idBrewery) {
+      if (product.brewery_id === Number(idBrewery)) {
         beersFilteredByBrewer.push(product);
       }
     }
@@ -99,10 +72,35 @@ export function findBreweryName(state, idUser) {
   let breweryName;
 
   for (let brewer of state.breweries) {
-    if (brewer.brewer_id == idUser) {
+    if (brewer.brewer_id === Number(idUser)) {
       breweryName = brewer.trade_name;
     }
   }
 
   return breweryName;
+}
+
+export function listFavouriteProductsId(state, idUser) {
+  const favouriteId = [];
+
+  if (idUser) {
+    for (let favourite of state.favourites) {
+      if (favourite.user_id === Number(idUser)) {
+        favouriteId.push(favourite.product_id);
+      }
+    }
+return favouriteId
+  }
+}
+
+export function favoritesUser(favourites, id) {
+  let res;
+
+  favourites.find((item) => {
+
+    if (item === id) {
+      res = true
+    }
+  })
+ return  res
 }

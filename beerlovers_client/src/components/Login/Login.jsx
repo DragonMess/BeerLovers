@@ -11,7 +11,7 @@ const Styles = styled.div`
   }
 `;
 const Login = (props) => {
-  const { signIn, logout,} = useApplication();
+  const { signIn, logout, state } = useApplication();
   const [textEmail, setTextEmail] = useState("");
   const [textPassword, setTextPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,17 +22,19 @@ const Login = (props) => {
       signIn({
         email: textEmail,
         password: textPassword,
-      }).then((validate) => {
-        if (validate) {
-          // props.setLogged(true);
-          props.history.push("/");
-        } else {
-          setTextEmail("");
-          setTextPassword("");
-          setError("Sorry those credentials are wrong");
-          props.history.push("/Login");
-        }
-      });
+      })
+        // .then(() => history.push("/"));
+        .then((validate) => {
+          if (validate) {
+            // props.setLogged(true);
+            props.history.push("/");
+          } else {
+            setTextEmail("");
+            setTextPassword("");
+            setError("Sorry those credentials are wrong");
+            props.history.push("/Login");
+          }
+        });
     } else {
       setError("Some fields are empty");
     }
@@ -94,6 +96,9 @@ const Login = (props) => {
         <br />
         <div>
           <h4 className="message">{error} </h4>
+          {state.errMessage === "ok" && (
+            <h4 className="message">"Sorry those credentials are wrong" </h4>
+          )}
         </div>
       </div>
     </Styles>

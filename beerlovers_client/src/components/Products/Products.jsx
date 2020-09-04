@@ -23,8 +23,7 @@ const Products = (props) => {
     setBeer(beerDescription);
     transition(PRODUCT_DESCRIPTION);
   };
-  const { state, setState } = useApplication();
-
+  const { state, setState, favouriteADD, favouriteDelete } = useApplication();
   const { mode, transition, back } = useVisualMode(
     !filterBeer ? PRODUCT_TYPES : PRODUCTLIST
   );
@@ -36,6 +35,8 @@ const Products = (props) => {
           setState={setState}
           beerType={filterBeer}
           findIdBeer={findIdBeer}
+          favouriteADD={favouriteADD}
+          favouriteDelete={favouriteDelete}
         />
       )}
       {mode === PRODUCT_TYPES && (
