@@ -1,17 +1,9 @@
-import React, { useState } from "react";
-import { Nav, Navbar, Button } from "react-bootstrap";
+import React from "react";
+import { Nav, Navbar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import useApplication from "../../hooks/useApplicationData";
-import { isLogin } from "../../helpers/isLogIn";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  Link,
-} from "react-router-dom";
 const Styles = styled.div`
   .myNav {
     margin: 0;
@@ -36,7 +28,7 @@ const Styles = styled.div`
 `;
 
 const Navigation = (props) => {
-  const { logout, isLogIn, state, logged, validate } = useApplication();
+  const { logout, state } = useApplication();
   const myId = localStorage.getItem("UserId");
   const handleLogOut = (e) => {
     // e.preventDefault();
@@ -86,7 +78,7 @@ const Navigation = (props) => {
           </Nav>
           <Nav>
             <Nav.Link className="navLink" href="/Login">
-              Login
+              Log In
             </Nav.Link>
             <Nav.Link className="navLink" href="/Register">
               Register

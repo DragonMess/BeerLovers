@@ -9,7 +9,7 @@ const { Styles } = styleCart();
 // localStorage.removeItem("cartItem");
 
 const CartListItem = (props) => {
-  const { idProduct, qty, price, name, type, stock } = props;
+  const { qty, price, name, type, stock } = props;
 
   const [beerQty, setBeerQty] = useState(qty);
   const handleIncreaseQty = (e) => {

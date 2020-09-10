@@ -197,6 +197,7 @@ export default function MyProductListItemDescription(props) {
                 </Button>
               </Col>
             </Row>
+            <p></p>
             <Row>
               <Col>
                 <Button className="bg-danger text-dark" onClick={handleDelete}>

@@ -7,7 +7,7 @@ const Styles = styled.div`
     padding: 0;
     margin: 0;
     background-color: #303841;
-    min-height: 100vh;
+    min-height: 500vh;
     font-family: "Montserrat", sans-serif;
     color: white;
   }

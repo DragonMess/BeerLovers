@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./components/Layout/Navigation";
@@ -15,13 +15,9 @@ import Register from "./Register";
 import NoMatch from "./NoMatch";
 import Cart from "./components/Cart/Cart";
 import Acount from "./components/Acount/Account";
-import useApplication from "./hooks/useApplicationData";
 import Layout from "./components/Layout/Layout";
 
 function App() {
-  const { signIn, logout, validate, setIsLogIn } = useApplication();
-  const [logged, setLogged] = useState(false);
-
   return (
     <>
       <Layout>

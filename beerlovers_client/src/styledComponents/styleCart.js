@@ -50,7 +50,7 @@ export default function StyleCart() {
       width: 100%;
       margin-left: auto;
       margin-rigth: auto;
-      padding: 6px;
+      padding: 15px;
     }
     .table-header {
       font-family: Montserrat;
@@ -69,7 +69,7 @@ export default function StyleCart() {
       // background: yellow;
     }
     .btn-success {
-      margin-left: 60px;
+      margin-left: 50px;
     }
   `;
   return {

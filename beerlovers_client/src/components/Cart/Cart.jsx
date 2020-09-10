@@ -3,10 +3,21 @@ import CartListItem from "./CartListItem";
 import { Row, Col, Button } from "react-bootstrap";
 import styleCart from "../../styledComponents/styleCart";
 import CartCheckout from "./CartCheckout";
+import AlertDismissible from "../AlertDismissible/AlertDismissible";
 const { Styles } = styleCart();
 
 const Cart = () => {
+  const [show, setShow] = useState(true);
   const [modalShow, setModalShow] = useState(false);
+  const [emailCheckout, setEmailCheckout] = useState(false);
+  const onHide = () => setModalShow(false);
+
+  const handleChekcout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("cart");
+    onHide();
+    setEmailCheckout(true);
+  };
 
   const cartItems = JSON.parse(localStorage.getItem("cart"));
   const cart = cartItems
@@ -50,13 +61,28 @@ const Cart = () => {
           >
             Continue Shopping
           </Button>
-
-          <Button className="btn-success" onClick={() => setModalShow(true)}>
-            Checkout
-          </Button>
+          {localStorage.getItem("cart") ? (
+            <Button className="btn-success" onClick={() => setModalShow(true)}>
+              Checkout
+            </Button>
+          ) : (
+            <div></div>
+          )}
         </section>
+        <p></p>
+        {emailCheckout ? (
+          <AlertDismissible show={show} setShow={setShow}>
+            You will receive an email to confirm your order details
+          </AlertDismissible>
+        ) : (
+          <div></div>
+        )}
       </article>
-      <CartCheckout show={modalShow} onHide={() => setModalShow(false)} />
+      <CartCheckout
+        handleChekcout={handleChekcout}
+        show={modalShow}
+        onHide={onHide}
+      />
     </Styles>
   );
 };

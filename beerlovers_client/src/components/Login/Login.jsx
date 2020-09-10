@@ -23,7 +23,7 @@ const Login = (props) => {
         email: textEmail,
         password: textPassword,
       })
-        // .then(() => history.push("/"));
+        // .then(() => props.history.push("/"))
         .then((validate) => {
           if (validate) {
             // props.setLogged(true);
@@ -80,13 +80,13 @@ const Login = (props) => {
             <Row>
               <Col xs={4}>
                 <Button variant="primary" type="submit" onClick={handleLogin}>
-                  Login
+                  Log In
                 </Button>
               </Col>
               <Col xs={4}></Col>
               <Col xs={4}>
                 <Button variant="danger" type="submit" onClick={handleLogOut}>
-                  Logout
+                  Log Out
                 </Button>
               </Col>
             </Row>

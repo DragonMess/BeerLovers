@@ -14,6 +14,7 @@ export default function useApplicationData() {
     // orders: [],
     // orders_details: [],
     user_id: "",
+    user: { name: "", email: "" },
     loggedIn: false,
     errMessage: null,
   });
@@ -25,37 +26,45 @@ export default function useApplicationData() {
 
   useEffect(() => {
     // const fetchData = () => {
-    Promise.all([
-      axios.get("http://localhost:3002/products", {
-        headers: {
-          Authorization: `Bearer ${TOKEN_STRING}`,
-        },
-      }),
-      axios.get("http://localhost:3002/breweries", {
-        headers: {
-          Authorization: `Bearer ${TOKEN_STRING}`,
-        },
-      }),
-      axios.get(`http://localhost:3002/favourites`, {
-        headers: {
-          Authorization: `Bearer ${TOKEN_STRING}`,
-        },
-      }),
-    ]).then((all) => {
-      setState((prev) => ({
-        ...prev,
-        products: all[0].data,
-        breweries: all[1].data,
-        favourites: all[2].data,
-        user_id: userID,
-        loggedIn: userID ? true : false,
-      }));
-    });
+    if (userID) {
+      Promise.all([
+        axios.get("http://localhost:3002/products", {
+          headers: {
+            Authorization: `Bearer ${TOKEN_STRING}`,
+          },
+        }),
+        axios.get("http://localhost:3002/breweries", {
+          headers: {
+            Authorization: `Bearer ${TOKEN_STRING}`,
+          },
+        }),
+        axios.get(`http://localhost:3002/favourites`, {
+          headers: {
+            Authorization: `Bearer ${TOKEN_STRING}`,
+          },
+        }),
+      ]).then((all) => {
+        setState((prev) => ({
+          ...prev,
+          products: all[0].data,
+          breweries: all[1].data,
+          favourites: all[2].data,
+          loggedIn: true,
+          user_id: localStorage.getItem("UserId"),
+          user: {
+            name: localStorage.getItem("UserName"),
+            email: localStorage.getItem("UserEmail"),
+          },
+          // user_id: userID,
+          // loggedIn: userID ? true : false,
+        }));
+      });
+    }
     // };
     // if (state.loggedIn) {
     //   fetchData();
     // }
-  }, [TOKEN_STRING, userID]);
+  }, [TOKEN_STRING, state.loggedIn, userID]);
 
   function signIn(userLog) {
     const user = {
@@ -77,13 +86,11 @@ export default function useApplicationData() {
           localStorage.setItem("UserId", res.data.id);
           localStorage.setItem("UserName", res.data.name);
           localStorage.setItem("UserEmail", res.data.email);
-          // setValidate(true),
-          // setIsLogIn(false))
-          //  validate = true);
           setState((prevState) => {
             return {
               ...prevState,
               user_id: res.data.id,
+              user: { name: res.data.name, email: res.data.email },
               loggedIn: true,
             };
           });
@@ -127,24 +134,53 @@ export default function useApplicationData() {
       email: userLog.email,
       password: userLog.password,
     };
-    axios({
-      url: "http://localhost:3002/public/register",
-      method: "POST",
-      data: user,
-    })
-      .then((res) => {
-        if (res.data.message !== "404") {
-          // le backend doit te renvoyer le token
-          localStorage.setItem("UserLogin", res.data.token);
-          localStorage.setItem("UserId", res.data.id);
-          localStorage.setItem("UserName", res.data.name);
-          localStorage.setItem("UserEmail", res.data.email);
-          setValidate(true);
-          // setIsLogIn(true);
-        }
+    return (
+      axios({
+        url: "http://localhost:3002/public/register",
+        method: "POST",
+        data: user,
       })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          if (res.data.message !== "404") {
+            // le backend doit te renvoyer le token
+            localStorage.setItem("UserLogin", res.data.token);
+            localStorage.setItem("UserId", res.data.id);
+            localStorage.setItem("UserName", JSON.parse(res.config.data).name);
+            localStorage.setItem(
+              "UserEmail",
+              JSON.parse(res.config.data).email
+            );
+            setState((prevState) => {
+              return {
+                ...prevState,
+                user_id: res.data.id,
+                user: {
+                  name: JSON.parse(res.config.data).name,
+                  email: JSON.parse(res.config.data).email,
+                },
+                loggedIn: true,
+              };
+            });
+            return (validate = true);
+          }
+          if (res.data.message === "404") {
+            setState((prevState) => {
+              return {
+                ...prevState,
+                user_id: "",
+                loggedIn: false,
+                errMessage: "ok",
+              };
+            });
+          }
+        })
+        // console.log(validate);
+        .catch((err) => console.log(err))
+    );
   }
+
+  // =========== Products ===================
+
   function UserUpDateInfo(
     userId,
     userName,
@@ -159,19 +195,36 @@ export default function useApplicationData() {
       password: userPassword,
       brewerName: userBrewerName,
     };
-    axios({
+    return axios({
       url: `http://localhost:3002/users/:${userID}`,
       headers: {
         Authorization: `Bearer ${TOKEN_STRING}`,
       },
-      method: "PUT",
+      method: "Put",
       data: user,
     })
       .then((res) => {
         console.log(res);
+        console.log(JSON.parse(res.config.data).name);
+        const updatedUser = {
+          id: JSON.parse(res.config.data).id,
+          name: JSON.parse(res.config.data).name,
+          email: JSON.parse(res.config.data).email,
+          brewerName: JSON.parse(res.config.data).brewerName,
+        };
+        localStorage.setItem("UserId", JSON.parse(res.config.data).id);
+        localStorage.setItem("UserName", JSON.parse(res.config.data).name);
+        localStorage.setItem("UserEmail", JSON.parse(res.config.data).email);
+
+        setState((prevState) => {
+          return {
+            ...prevState,
+          };
+        });
       })
       .catch((err) => console.log(err));
   }
+
   function productUpDate(
     alcohol,
     brewery_id,
@@ -198,7 +251,7 @@ export default function useApplicationData() {
       rate,
       unit_price,
     };
-    axios({
+    return axios({
       url: `http://localhost:3002/products/:${id}`,
       headers: {
         Authorization: `Bearer ${TOKEN_STRING}`,
@@ -213,7 +266,7 @@ export default function useApplicationData() {
   }
 
   function productDelete(id) {
-    axios({
+    return axios({
       url: `http://localhost:3002/products/${id}`,
       headers: {
         Authorization: `Bearer ${TOKEN_STRING}`,
@@ -226,17 +279,14 @@ export default function useApplicationData() {
       .catch((err) => console.log(err));
   }
 
-// =========== Favourites ===================
+  // =========== Favourites ===================
 
-  function favouriteADD(
-    product_id,
-    user_id
-  ) {
+  function favouriteADD(product_id, user_id) {
     const favourite = {
       product_id,
-      user_id
+      user_id,
     };
-    axios({
+    return axios({
       url: `http://localhost:3002/favourites/`,
       headers: {
         Authorization: `Bearer ${TOKEN_STRING}`,
@@ -246,29 +296,26 @@ export default function useApplicationData() {
     })
       .then((res) => {
         const newFavourite = {
-          id:res.data,
-          "product_id": res.config.data.product_id,
-          "user_id": res.config.data.user_id
-        }
-          setState((prevState) => {
-            return {
-              ...prevState,
-              favourites:[newFavourite, ...state.favourites]
-            };
-          });
-
+          id: res.data,
+          product_id: res.config.data.product_id,
+          user_id: res.config.data.user_id,
+        };
+        setState((prevState) => {
+          return {
+            ...prevState,
+            favourites: [newFavourite, ...state.favourites],
+          };
+        });
       })
       .catch((err) => console.log(err));
   }
 
-  function favouriteDelete(product_id,
-    user_id
-  ) {
+  function favouriteDelete(product_id, user_id) {
     const favourite = {
       product_id,
-      user_id
-    }; 
-    axios({
+      user_id,
+    };
+    return axios({
       url: `http://localhost:3002/favourites/`,
       headers: {
         Authorization: `Bearer ${TOKEN_STRING}`,
@@ -297,7 +344,7 @@ export default function useApplicationData() {
     favouriteADD,
     favouriteDelete,
     logged,
-        // isLogIn,
+    // isLogIn,
     // setIsLogIn,
   };
 }

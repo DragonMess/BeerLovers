@@ -4,7 +4,7 @@ import { findBreweryName } from "../../helpers/selectors";
 import { Form, Container, Col, Row, Button } from "react-bootstrap";
 
 function MyAcount(props) {
-  const { showProducts } = props;
+  const { showProducts, showADDProducts } = props;
   const { state, UserUpDateInfo } = useApplication();
 
   const myId = localStorage.getItem("UserId");
@@ -21,15 +21,20 @@ function MyAcount(props) {
 
   const [error, setError] = useState(null);
 
+  const handleADDProducts = (e) => {
+    e.preventDefault();
+    showADDProducts();
+  };
   const handleShowProducts = (e) => {
     e.preventDefault();
     showProducts();
   };
   // finir la request to server to change de data
   const handleSave = (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     if (textEmail && textName && textBreweryName && textPassword) {
       UserUpDateInfo(myId, textName, textEmail, textPassword, textBreweryName);
+      // .then((res) => console.log(res));
     } else {
       setError("Some fields are empty");
     }
@@ -145,11 +150,7 @@ function MyAcount(props) {
             </Button>
             <br />
             <br />
-            <Button
-              variant="primary"
-              type="submit"
-              onClick={handleShowProducts}
-            >
+            <Button variant="primary" type="submit" onClick={handleADDProducts}>
               Add Product
             </Button>
           </div>

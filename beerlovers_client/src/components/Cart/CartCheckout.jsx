@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Row, Col, Modal, Container } from "react-bootstrap";
 const CartCheckout = (props) => {
-  const { onHide } = props;
+  const { handleChekcout, onHide } = props;
 
-  const handleChekcout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("cart");
-    onHide();
-    // props.history.push("/");
-    // return <Redirect to="/Login" />;
-  };
+  // const handleChekcout = (e) => {
+  //   e.preventDefault();
+  //   localStorage.removeItem("cart");
+  //   onHide();
+  //   // props.history.push("/");
+  //   // return <Redirect to="/Login" />;
+  // };
   return (
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={onHide}>
         <Modal.Title id="contained-modal-title-vcenter">Checkout</Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
@@ -91,7 +91,7 @@ const CartCheckout = (props) => {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleChekcout}>Continue to checkout</Button>
+        <Button onClick={handleChekcout}>Confirm to checkout</Button>
       </Modal.Footer>
     </Modal>
   );
