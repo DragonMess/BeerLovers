@@ -78,13 +78,13 @@ const Login = (props) => {
           </Form.Group>
           <Container className="buttons">
             <Row>
-              <Col xs={4}>
+              <Col xs={5}>
                 <Button variant="primary" type="submit" onClick={handleLogin}>
                   Log In
                 </Button>
               </Col>
-              <Col xs={4}></Col>
-              <Col xs={4}>
+              <Col xs={2}></Col>
+              <Col xs={5}>
                 <Button variant="danger" type="submit" onClick={handleLogOut}>
                   Log Out
                 </Button>

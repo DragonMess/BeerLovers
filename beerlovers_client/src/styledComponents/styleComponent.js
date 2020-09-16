@@ -131,7 +131,7 @@ export default function StyleComponenet() {
     }
     // ======== ProductsList ==============
     .beerList {
-      padding-top: 20px;
+      // padding-top: 20px;
       margin-top: 20px;
       margin-left: auto;
       margin-right: auto;
@@ -146,10 +146,10 @@ export default function StyleComponenet() {
     }
 
     .beerType {
-      text-align: left;
+      text-align: center;
       margin-top: 10px;
-      margin-left: 5%;
-      width: 198px;
+      // margin-left: 5%;
+      // width: 198px;
       height: 22px;
 
       font-family: Montserrat;

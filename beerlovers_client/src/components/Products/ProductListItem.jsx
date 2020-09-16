@@ -16,35 +16,31 @@ const ProductListItem = (props) => {
     favouriteADD,
     favouriteDelete,
     userId,
-    id
+    id,
   } = props;
 
   const [isFavourite, setIsFavourite] = useState(IsFavouriteByUser);
   const handleFavourite = (e) => {
     e.preventDefault();
     // setIsFavourite(!isFavourite);
-    console.log(id)
+    // console.log(id)
 
-    if(isFavourite === false){
+    if (isFavourite === false) {
       setIsFavourite(!isFavourite);
       console.log("object");
-      favouriteADD(id, userId)
+      favouriteADD(id, userId);
     }
     if (isFavourite === true) {
       setIsFavourite(!isFavourite);
       console.log("object");
-      favouriteDelete(id, userId)
+      favouriteDelete(id, userId);
     }
-   
-    
   };
   return (
     <Styles>
       <div className="beerSection">
         <section className="nameProduct">
-          <h3>
-            {name}
-          </h3>
+          <h3>{name}</h3>
           <ButtonFavourite
             isFavourite={isFavourite}
             onClick={handleFavourite}

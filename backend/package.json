@@ -6,7 +6,9 @@
   "proxy": "http://localhost:3002",
   "scripts": {
     "start": "node application.js",
-    "dev": "nodemon application.js",
+    "server": "nodemon application.js",
+    "client": "npm atart --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "stop": "taskkill -f -im node.exe"
   },
   "dependencies": {
@@ -23,6 +25,7 @@
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
+    "nodemailer": "^6.4.11",
     "pg": "^8.2.1",
     "pg-native": "^3.0.0"
   },

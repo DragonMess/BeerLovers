@@ -328,6 +328,42 @@ export default function useApplicationData() {
       })
       .catch((err) => console.log(err));
   }
+  // === order Email =======
+
+  function sendEmail(cartItems, userEmail) {
+    const orderDetails = {
+      cartItems: cartItems,
+      email: userEmail,
+    };
+    return axios({
+      url: `http://localhost:3002/api/forma`,
+      headers: {
+        Authorization: `Bearer ${TOKEN_STRING}`,
+      },
+      method: "Post",
+      data: orderDetails,
+    })
+      .then((res) => {
+        console.log(res);
+        // console.log(JSON.parse(res.config.data).name);
+        // const updatedUser = {
+        //   id: JSON.parse(res.config.data).id,
+        //   name: JSON.parse(res.config.data).name,
+        //   email: JSON.parse(res.config.data).email,
+        //   brewerName: JSON.parse(res.config.data).brewerName,
+        // };
+        // localStorage.setItem("UserId", JSON.parse(res.config.data).id);
+        // localStorage.setItem("UserName", JSON.parse(res.config.data).name);
+        // localStorage.setItem("UserEmail", JSON.parse(res.config.data).email);
+
+        // setState((prevState) => {
+        //   return {
+        //     ...prevState,
+        //   };
+        // });
+      })
+      .catch((err) => console.log(err));
+  }
 
   // ======== return functions ==========
 
@@ -344,6 +380,7 @@ export default function useApplicationData() {
     favouriteADD,
     favouriteDelete,
     logged,
+    sendEmail,
     // isLogIn,
     // setIsLogIn,
   };

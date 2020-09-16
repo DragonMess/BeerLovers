@@ -4,22 +4,28 @@ import { Row, Col, Button } from "react-bootstrap";
 import styleCart from "../../styledComponents/styleCart";
 import CartCheckout from "./CartCheckout";
 import AlertDismissible from "../AlertDismissible/AlertDismissible";
+import useApplication from "../../hooks/useApplicationData";
 const { Styles } = styleCart();
 
+// sendEmail
 const Cart = () => {
+  const { sendEmail } = useApplication();
   const [show, setShow] = useState(true);
   const [modalShow, setModalShow] = useState(false);
   const [emailCheckout, setEmailCheckout] = useState(false);
+  const [orderDetails, setOrderDetails] = useState({});
   const onHide = () => setModalShow(false);
 
+  const cartItems = JSON.parse(localStorage.getItem("cart"));
+  const userEmail = localStorage.getItem("UserEmail");
   const handleChekcout = (e) => {
     e.preventDefault();
+    sendEmail(cartItems, userEmail);
     localStorage.removeItem("cart");
     onHide();
     setEmailCheckout(true);
   };
 
-  const cartItems = JSON.parse(localStorage.getItem("cart"));
   const cart = cartItems
     ? cartItems.map((item, index) => {
         return (

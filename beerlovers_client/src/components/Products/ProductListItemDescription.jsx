@@ -4,6 +4,10 @@ import { Button, Row, Col, FormControl, Container } from "react-bootstrap";
 import styled from "styled-components";
 
 const Styles = styled.div`
+  .mainBeerContainer {
+    width: 99%;
+    position: fixed;
+  }
   .beerDescriptionSection {
     margin-top: 25px;
     margin-left: auto;
@@ -19,7 +23,7 @@ const Styles = styled.div`
     text-align: left;
     margin-top: 0px;
     margin-botton: 8px;
-    margin-left: 16px;
+    margin-left: 25px;
     width: 285.25px;
     height: 0px;
     font-family: Montserrat;
@@ -34,9 +38,13 @@ const Styles = styled.div`
   }
   p {
     margin-right: 20px;
+    margin-left: 10px;
   }
   h3 {
     margin-left: 10px;
+    margin-bottom: 30px;
+    color: #ea9215;
+    margin-top: 12px;
   }
 
   .beerImage {
@@ -247,107 +255,110 @@ const ProductListItemDescription = (props) => {
   };
   return (
     <Styles>
-      <section className="beerDescriptionSection">
-        <div className="HeaderProductDescription">
-          <img className="beerImage" src={imageSrc} alt="beerType"></img>
-          <div>
-            {/* <FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />
+      <div className="mainBeerContainer">
+        <section className="beerDescriptionSection">
+          <div className="HeaderProductDescription">
+            <img className="beerImage" src={imageSrc} alt="beerType"></img>
+            <div>
+              {/* <FontAwesomeIcon className="heartIcon" icon={["fas", "heart"]} />
             <FontAwesomeIcon className="heartIcon" icon={["far", "hearts"]} /> */}
-            <h3 className="nameProductDescription">
-              {props.children[1].product_name}
-            </h3>
-            <div className="nameProduct">
-              <p className="description">
-                {description(props.children[1].product_type)}
-              </p>
-              <Row>
-                <h4 className="starProduct">
-                  <FontAwesomeIcon
-                    className="starIcon"
-                    icon={["fas", "star"]}
-                  />
-                  {props.children[1].rate}/ 5
-                </h4>
+              <h3 className="nameProductDescription">
+                {props.children[1].product_name}
+              </h3>
+              <div className="nameProduct">
+                <p className="description">
+                  {description(props.children[1].product_type)}
+                </p>
+                <Row>
+                  <h4 className="starProduct">
+                    <FontAwesomeIcon
+                      className="starIcon"
+                      icon={["fas", "star"]}
+                    />
+                    {props.children[1].rate}/ 5
+                  </h4>
+                </Row>
+              </div>
+            </div>
+          </div>
+          <article className="detail_article">
+            <div className="elementDescription">
+              <div className="typeComposition">
+                <b>MALT</b>
+              </div>
+              <div className="valueElement"> Pilsen</div>
+            </div>
+            <hr className="line" />
+            <div className="elementDescription">
+              <div className="typeComposition">
+                <b>HOPS</b>
+              </div>
+              <div className="valueElement"> Saaz, Nugget, Bramling cross</div>
+            </div>
+            <hr className="line" />
+            <div className="productComposition">
+              <div className="typeComposition">
+                <b>Alcohol</b>
+              </div>
+              <div className="compositionValue">
+                {props.children[1].alcohol}%
+              </div>
+            </div>
+            <hr className="line" />
+            <div className="productComposition">
+              <div className="typeComposition">
+                <b>IBU</b>
+              </div>
+              <div className="compositionValue">{props.children[1].ibu}</div>
+            </div>
+            <div className="productComposition">
+              <div className="typeComposition">
+                <b>EBC</b>
+              </div>
+              <div className="compositionValue">{props.children[1].ebc}</div>
+            </div>
+            <hr className="line" />
+            <div className="productComposition">
+              <div className="typeComposition">
+                <b>Price</b>
+              </div>
+              <div className="compositionValue">
+                {props.children[1].unit_price}
+              </div>
+            </div>
+            <hr className="line" />
+          </article>
+        </section>
+        <section className="submitContainer">
+          <div>Quantity</div>
+          <Row>
+            <Col xs={4}>
+              <h2 className="input-qty">{beerQty}</h2>
+            </Col>
+            <Col xs={2}>
+              <Row className="btnsQty">
+                <FontAwesomeIcon
+                  className="btnsQty"
+                  onClick={handleIncreaseQty}
+                  className="plusIcon"
+                  icon={["fas", "plus-square"]}
+                />
+                <FontAwesomeIcon
+                  className="btnsQty"
+                  onClick={handleDecreasetQty}
+                  className="minusIcon"
+                  icon={["fas", "minus-square"]}
+                />
               </Row>
-            </div>
-          </div>
-        </div>
-        <article className="detail_article">
-          <div className="elementDescription">
-            <div className="typeComposition">
-              <b>MALT</b>
-            </div>
-            <div className="valueElement"> Pilsen</div>
-          </div>
-          <hr className="line" />
-          <div className="elementDescription">
-            <div className="typeComposition">
-              <b>HOPS</b>
-            </div>
-            <div className="valueElement"> Saaz, Nugget, Bramling cross</div>
-          </div>
-          <hr className="line" />
-          <div className="productComposition">
-            <div className="typeComposition">
-              <b>Alcohol</b>
-            </div>
-            <div className="compositionValue">{props.children[1].alcohol}%</div>
-          </div>
-          <hr className="line" />
-          <div className="productComposition">
-            <div className="typeComposition">
-              <b>IBU</b>
-            </div>
-            <div className="compositionValue">{props.children[1].ibu}</div>
-          </div>
-          <div className="productComposition">
-            <div className="typeComposition">
-              <b>EBC</b>
-            </div>
-            <div className="compositionValue">{props.children[1].ebc}</div>
-          </div>
-          <hr className="line" />
-          <div className="productComposition">
-            <div className="typeComposition">
-              <b>Price</b>
-            </div>
-            <div className="compositionValue">
-              {props.children[1].unit_price}
-            </div>
-          </div>
-          <hr className="line" />
-        </article>
-      </section>
-      <section className="submitContainer">
-        <div>Quantity</div>
-        <Row>
-          <Col xs={4}>
-            <h2 className="input-qty">{beerQty}</h2>
-          </Col>
-          <Col xs={2}>
-            <Row className="btnsQty">
-              <FontAwesomeIcon
-                className="btnsQty"
-                onClick={handleIncreaseQty}
-                className="plusIcon"
-                icon={["fas", "plus-square"]}
-              />
-              <FontAwesomeIcon
-                className="btnsQty"
-                onClick={handleDecreasetQty}
-                className="minusIcon"
-                icon={["fas", "minus-square"]}
-              />
-            </Row>
-          </Col>
-          <Col xs={6}>
-            <Button className="cart-btn" onClick={handleAddToCart}>
-              ADD TO CART
-            </Button>{" "}
-          </Col>
-        </Row>
-        {/* <hr className="line" /> */}
-        {/* <Row>
+            </Col>
+            <Col xs={6}>
+              <Button className="cart-btn" onClick={handleAddToCart}>
+                ADD TO CART
+              </Button>{" "}
+            </Col>
+          </Row>
+          {/* <hr className="line" /> */}
+          {/* <Row>
             <Col xs={3}>
               <div className="rate-txt">Rate Beer</div>
             </Col>
@@ -379,7 +390,8 @@ const ProductListItemDescription = (props) => {
               <Button className="rate-btn">Rate</Button>
             </Col>
           </Row> */}
-      </section>
+        </section>
+      </div>
     </Styles>
   );
 };

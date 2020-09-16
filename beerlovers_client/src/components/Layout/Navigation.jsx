@@ -8,6 +8,7 @@ const Styles = styled.div`
   .myNav {
     margin: 0;
     background: #ea9215;
+    // position:fixed;
   }
   .navbar-brand {
     width: 175px;
